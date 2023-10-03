@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  padding: 20px;
+  background-color: #333;
+  background-image: linear-gradient(to right, #800000, #333 90%);
+}
+
+.header .signin-container{
+  width: 100%;
+  max-width: max-content;
+  height: 100%;
+}
+
+.header .signin-container .btn{
+  width: 200px;
+  height: 100%;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  border: 3px solid #000;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.header .signin-container .btn:hover{
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+.header .signin-container .btn:active{
+  background-color: #333;
+  color: #fff;
+  scale: 99%;
+}
+
+.header .title-container{
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.header .title-container h1{
+  color: #fff;
+}

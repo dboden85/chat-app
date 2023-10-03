@@ -1,0 +1,32 @@
+.right, .left{
+    display: flex;
+    padding: 10px;
+    min-height:fit-content
+}
+
+.right{
+    justify-content: right;
+}
+
+.left{
+    justify-content: left;
+}
+
+p{
+    width: max-content;
+    min-width: 200px;
+    max-width: 90%;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 25px;
+}
+
+.right p{
+    background-color: green;
+}
+
+.left p{
+    background-color: blue;
+}
