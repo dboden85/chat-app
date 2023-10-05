@@ -1,3 +1,4 @@
+import React from 'react';
 import classes from './ChatBox.module.css';
 
 const ChatBox = (props) => {

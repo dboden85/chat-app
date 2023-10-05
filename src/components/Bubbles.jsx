@@ -1,3 +1,4 @@
+import React from 'react';
 import classes from './Bubbles.module.css';
 
 const Bubbles = (props)=>{

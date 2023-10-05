@@ -1,3 +1,4 @@
+import React from 'react';
 import Bubbles from './Bubbles';
 import classes from './Conversation.module.css';
 
