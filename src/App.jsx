@@ -17,7 +17,6 @@ function App() {
 
   const messageChangeHandler = e =>{
     newMessage.current = e.target.value;
-    console.log(newMessage);
   }
 
   const messageClickHandler = e => {
@@ -30,7 +29,6 @@ function App() {
       isUser: true
     }]);
   }
-  console.log(dummyConvo);
   
   return (
       <div className="app">
