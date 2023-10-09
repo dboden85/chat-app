@@ -26,7 +26,7 @@ const Conversation = (props) => {
         {
           props.chats.map(chat=>{
             return(
-            <Bubbles id={chat.id} isUser={chat.isUser} mess={chat.message}/>
+            <Bubbles id={chat.id} isUser={chat.isUser} mess={chat.message} name={chat.name}/>
             )
           })
         }

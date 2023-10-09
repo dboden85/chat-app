@@ -3,8 +3,9 @@ import classes from './Bubbles.module.css';
 
 const Bubbles = (props)=>{
     return(
-        <li key={props.id} className={props.isUser ? classes.right : classes.left}>
-            <p>{props.mess}</p>
+        <li key={props.key} className={props.isUser ? classes.right : classes.left}>
+            <p className={classes.message}>{props.mess}</p>
+            <p className={classes.name}>{'-'+props.name}</p>
         </li>
     )
 }

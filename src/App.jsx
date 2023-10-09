@@ -10,7 +10,14 @@ function App() {
     name: 'David',
     message: 'Hi Mark!',
     isUser: true
-  }])
+  },
+  {
+    id: 'c2',
+    name: 'Mark',
+    message: 'Hi Dave!',
+    isUser: false
+  }
+])
 
   const newMessage = useRef('');
 
@@ -23,11 +30,11 @@ function App() {
     e.preventDefault();
 
     setDummyConvo([...dummyConvo,{
-      id: 'c2',
+      id: 'c3',
       name: 'David',
       message: newMessage.current,
       isUser: true
-    }]);
+    }])
   }
   
   return (
