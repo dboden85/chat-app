@@ -3,8 +3,7 @@
   align-items: center;
   height: 100px;
   padding: 20px;
-  background-color: #333;
-  background-image: linear-gradient(to right, #800000, #333 90%);
+  background-color: #196896;
 }
 
 .header .signin-container{

@@ -24,9 +24,9 @@ p{
 }
 
 .right p{
-    background-color: green;
+    background-color: #196896;
 }
 
 .left p{
-    background-color: blue;
+    background-color: rgb(115, 115, 131);
 }
