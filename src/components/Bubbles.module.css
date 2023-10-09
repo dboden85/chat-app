@@ -38,19 +38,10 @@
     border-radius: 25px;
 }
 
-<<<<<<< HEAD
 .right .message{
     background-color: green;
 }
 
 .left .message{
     background-color: blue;
-=======
-.right p{
-    background-color: #196896;
-}
-
-.left p{
-    background-color: rgb(115, 115, 131);
->>>>>>> 05068515ee7771f9a283394846e50978e7cc0e51
 }
