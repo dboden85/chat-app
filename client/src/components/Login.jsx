@@ -37,14 +37,10 @@ const Login = (props) => {
             )
             .then(
                 data => {
-                // console.log(data);
-                console.log(data)
-
                 if(data.status){
-                    alert('Welcome In');
                     props.setLogin(data.status);
                 }else{
-                    alert('You done fucked up!');
+                    alert('Please Check your login info and try again.');
                 }
                 }
             )
