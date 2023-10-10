@@ -2,15 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
 app.get('/api/users', cors(), (req, res) => {
   res.json({"users":[
     {
-      'name': 'David'
+      'id': 1,
+      'name': 'David',
+      'username': 'skidoosh',
+      'password': 'boop123'
     },
     {
-      'name': 'Mark'
+      'id': 2,
+      'name': 'Mark',
+      'username': 'whore',
+      'password': 'bloop123'
     }
   ]});
 });
@@ -24,6 +30,6 @@ app.get('/api/users', cors(), (req, res) => {
 //   });
 // });
 
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+app.listen(5000, () => {
+  console.log(`server is running on port 5000`);
 });

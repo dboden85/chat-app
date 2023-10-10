@@ -6,8 +6,7 @@ import ChatBox from './components/ChatBox'
 import Login from './components/Login'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [users, setUsers] = useState([{}]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dummyConvo, setDummyConvo] = useState([{
     id: 'c1',
     name: 'David',
@@ -37,29 +36,6 @@ function App() {
       message: newMessage.current,
       isUser: true
     }])
-  }
-
-  useEffect(()=>{
-    fetch('http://localhost:5000/api/users')
-    .then(
-      response => response.json()
-    )
-    .then(
-      data => {
-        // console.log(data);
-        setUsers(data);
-        console.log('Users are set')
-      }
-    )
-    .catch(
-      err =>{
-        alert(err  + '\nLet Dave or Mark know');
-      }
-    )
-  },[])
-
-  if(users.users){
-    console.log(users)
   }
   
   return (
