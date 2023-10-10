@@ -3,8 +3,10 @@ import './App.css'
 import Header from './components/Header'
 import Conversation from './components/Conversation'
 import ChatBox from './components/ChatBox'
+import Login from './components/Login'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [users, setUsers] = useState([{}]);
   const [dummyConvo, setDummyConvo] = useState([{
     id: 'c1',
@@ -38,7 +40,7 @@ function App() {
   }
 
   useEffect(()=>{
-    fetch('http://192.168.0.121:5000/api/users')
+    fetch('http://localhost:5000/api/users')
     .then(
       response => response.json()
     )
@@ -62,11 +64,14 @@ function App() {
   
   return (
       <div className="app">
+        {!isLoggedIn ? <Login /> :
         <div className='app-container'>
           <Header/>
           <Conversation chats={dummyConvo}/>
           <ChatBox onClick={messageClickHandler} newMess={messageChangeHandler}/>
-        </div>
+      </div>
+        }
+        
       </div>
   )
 }
