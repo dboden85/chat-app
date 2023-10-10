@@ -1,23 +1,7 @@
 import React from 'react';
-import Bubbles from './Bubbles';
 import classes from './Conversation.module.css';
 
 const Conversation = (props) => {
-
-//   const DUMMYCONVO = [
-//     {
-//     id : 'c1',
-//     name : 'Mark',
-//     message : 'Hi Dave!',
-//     isUser : false
-//   },
-//   {
-//     id : 'c2',
-//     name : 'Dave',
-//     message : 'Hi Mark!',
-//     isUser : true
-//   }
-// ]
 
   return (
     <div className={classes['convo-box']}>
@@ -26,7 +10,10 @@ const Conversation = (props) => {
         {
           props.chats.map(chat=>{
             return(
-            <Bubbles id={chat.id} isUser={chat.isUser} mess={chat.message} name={chat.name}/>
+              <li key={chat.id} className={chat.isUser ? classes.right : classes.left}>
+                <p className={classes.message}>{chat.message}</p>
+                <p className={classes.name}>{'-'+chat.name}</p>
+              </li>
             )
           })
         }

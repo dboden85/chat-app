@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Conversation from './components/Conversation'
 import ChatBox from './components/ChatBox'
 
 function App() {
+  const [users, setUsers] = useState([{}]);
   const [dummyConvo, setDummyConvo] = useState([{
     id: 'c1',
     name: 'David',
@@ -21,7 +22,6 @@ function App() {
 
   const newMessage = useRef('');
 
-
   const messageChangeHandler = e =>{
     newMessage.current = e.target.value;
   }
@@ -36,6 +36,18 @@ function App() {
       isUser: true
     }])
   }
+
+  useEffect(()=>{
+    fetch('/api/users').then(
+      response => response.json()
+    ).then(
+      data => {
+        console.log(data)
+        // setUsers(data)
+        setUsers(data);
+      }
+    )
+  },[])
   
   return (
       <div className="app">
