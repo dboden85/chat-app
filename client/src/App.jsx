@@ -38,13 +38,14 @@ function App() {
   }
 
   useEffect(()=>{
-    fetch('/api/users').then(
+    fetch('http://192.168.0.121:5000/api/users')
+    .then(
       response => response.json()
-    ).then(
+    )
+    .then(
       data => {
-        console.log(data)
-        // setUsers(data)
-        setUsers(data);
+        console.log(data);
+        // setUsers(data);
       }
     )
   },[])
