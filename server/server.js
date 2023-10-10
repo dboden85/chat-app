@@ -12,7 +12,7 @@ app.get('/api/users', cors(), (req, res) => {
       'name': 'David'
     },
     {
-      'name': 'TongTong'
+      'name': 'Mark'
     }
   ]});
 });

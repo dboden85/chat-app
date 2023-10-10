@@ -44,11 +44,21 @@ function App() {
     )
     .then(
       data => {
-        console.log(data);
-        // setUsers(data);
+        // console.log(data);
+        setUsers(data);
+        console.log('Users are set')
+      }
+    )
+    .catch(
+      err =>{
+        alert(err  + '\nLet Dave or Mark know');
       }
     )
   },[])
+
+  if(users.users){
+    console.log(users)
+  }
   
   return (
       <div className="app">

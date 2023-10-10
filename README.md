@@ -8,3 +8,26 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 Mark is a bitch!
+
+if you are cloning from github you will need the following:
+
+You will need to add these dependencies in the client directory order for the app to work.
+
+npm i vite
+npm i npm
+
+
+You will need to add these dependencies in the server directory order for the app to work.
+
+npm i cors
+npm i express
+npm i nodemon -D
+
+You will need to the following command in the client directory and server directory simultaneously. 
+
+npm run dev
+
+or if you like to expose the client directory to the network (mostly for dave to run it on pi):
+
+npm run dev -- --host
+
