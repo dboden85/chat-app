@@ -1,11 +1,16 @@
 import React from 'react';
 import classes from "./Header.module.css";
 
-const Header = () => {
+const Header = (props) => {
+
+  const onSignOutHandler = ()=>{
+    props.setLogin(0);
+  }
+
   return (
     <div className={classes.header}>
-      <div className={classes['signin-container']}>
-        <button className={classes.btn}>Sign In</button>
+      <div className={classes['signout-container']}>
+        <button onClick={onSignOutHandler} className={classes.btn}>Sign Out</button>
       </div>
       <div className={classes['title-container']}>
         <h1>MD CHAT</h1>

@@ -37,15 +37,24 @@ function App() {
       isUser: true
     }])
   }
+
+  const loginHandler = (data)=>{
+    if(data){
+      setIsLoggedIn(true);
+    }else{
+      setIsLoggedIn(false);
+    }
+    
+  }
   
   return (
       <div className="app">
-        {!isLoggedIn ? <Login /> :
+        {!isLoggedIn ? <Login setLogin={loginHandler} /> :
         <div className='app-container'>
-          <Header/>
+          <Header setLogin={loginHandler}/>
           <Conversation chats={dummyConvo}/>
           <ChatBox onClick={messageClickHandler} newMess={messageChangeHandler}/>
-      </div>
+        </div>
         }
         
       </div>

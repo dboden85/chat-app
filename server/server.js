@@ -1,24 +1,37 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-// const PORT = process.env.PORT || 5000;
+app.use(bodyParser.json());
+app.use(cors());
 
-app.get('/api/users', cors(), (req, res) => {
-  res.json({"users":[
-    {
-      'id': 1,
-      'name': 'David',
-      'username': 'skidoosh',
-      'password': 'boop123'
-    },
-    {
-      'id': 2,
-      'name': 'Mark',
-      'username': 'whore',
-      'password': 'bloop123'
-    }
-  ]});
+const users = [{
+  'id': 1,
+  'name': 'David',
+  'username': 'dboden',
+  'password': 'awesome'
+},
+{
+  'id': 2,
+  'name': 'Mark',
+  'username': 'mnoesen',
+  'password': 'iheartdudes'
+}]
+
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.post('/api/users', (req, res) => {
+  const { username, pass } = req.body;
+  const user = users.find((user) => user.username === username && user.password === pass);
+
+  if (user) {
+    res.status(200).json({ message: 'Login successful', name: user.name, id: user.id, status: 1 });
+  } else {
+    res.status(401).json({ message: 'Login failed', status: 0 });
+  }
 });
 
 // app.get('/api/users', (req, res) => {

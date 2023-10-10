@@ -6,13 +6,13 @@
   background-color: #196896;
 }
 
-.header .signin-container{
+.header .signout-container{
   width: 100%;
   max-width: max-content;
   height: 100%;
 }
 
-.header .signin-container .btn{
+.header .signout-container .btn{
   width: 200px;
   height: 100%;
   background-color: #000;
@@ -23,13 +23,13 @@
   overflow: hidden;
 }
 
-.header .signin-container .btn:hover{
+.header .signout-container .btn:hover{
   background-color: #fff;
   color: #000;
   cursor: pointer;
 }
 
-.header .signin-container .btn:active{
+.header .signout-container .btn:active{
   background-color: #333;
   color: #fff;
   scale: 99%;

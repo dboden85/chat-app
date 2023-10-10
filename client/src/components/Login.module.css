@@ -36,3 +36,14 @@ h2{
     height: 30px;
     font-size: 20px;
 }
+
+.loginform input.submit{
+    margin-top: 20px;
+    color: #fff;
+    background-color: #000;
+}
+
+.loginform input.submit:hover{
+    background-color: #fff;
+    color: #000;
+}

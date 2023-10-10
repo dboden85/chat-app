@@ -1,41 +1,88 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import classes from './Login.module.css';
 
 
-const Login =() => {
-    const [users, setUsers] = useState([{}]);
+const Login = (props) => {
+    const [userName, setUserName] = useState(null);
+    const [userPass, setUserPass] = useState(null);
 
-    useEffect(()=>{
-        fetch('http://localhost:5000/api/users')
-        .then(
-            response => response.json()
-        )
-        .then(
-            data => {
-            // console.log(data);
-            setUsers(data);
-            console.log('Users are set')
-            }
-        )
-        .catch(
-            err =>{
-            alert(err  + '\nLet Dave or Mark know');
-            }
-        )
-        },[])
+    const userNameChangeHandler = (e)=>{
+        setUserName(e.target.value);
+    }
 
-        if(users.users){
-        console.log(users)
+    const userPassChangeHandler = (e)=>{
+        setUserPass(e.target.value);
+    }
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        if(userName && userPass){
+            getUsers();
+        }else{
+            alert('Missing Info')
         }
+        
+    }
+
+    const getUsers = ()=>{
+        fetch('http://localhost:5000/api/users',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({'pass': userPass, 'username': userName})
+        })
+            .then(
+                response => response.json()
+            )
+            .then(
+                data => {
+                // console.log(data);
+                console.log(data)
+
+                if(data.status){
+                    alert('Welcome In');
+                    props.setLogin(data.status);
+                }else{
+                    alert('You done fucked up!');
+                }
+                }
+            )
+            .catch(
+                err =>{
+                alert(err  + '\nLet Dave or Mark know');
+                }
+            )
+    }
+
+    // const getUsers = ()=>{
+    //     fetch('http://localhost:5000/api/users')
+    //         .then(
+    //             response => response.json()
+    //         )
+    //         .then(
+    //             data => {
+    //             // console.log(data);
+    //             console.log(data)
+    //             }
+    //         )
+    //         .catch(
+    //             err =>{
+    //             alert(err  + '\nLet Dave or Mark know');
+    //             }
+    //         )
+    // }
+
 
     return(
         <div className={classes['login-container']}>
             <h2>Chat Login</h2>
-            <form className={classes.loginform} action="/">
+            <form className={classes.loginform} action="/" onSubmit={onSubmitHandler}>
                 <label htmlFor="uname">Username</label>
-                <input type="text" name="uname" />
+                <input onChange={userNameChangeHandler} type="text" id="uname" />
                 <label htmlFor="pass">Password</label>
-                <input type="password" name="pass" />
+                <input onChange={userPassChangeHandler} type="password" id="pass" />
+                <input className={classes.submit} type="submit" />
             </form>
         </div>
     )
