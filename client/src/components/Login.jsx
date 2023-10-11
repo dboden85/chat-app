@@ -38,7 +38,7 @@ const Login = (props) => {
             .then(
                 data => {
                 if(data.status){
-                    props.setLogin(data.status);
+                    props.setLogin(data);
                 }else{
                     alert('Please Check your login info and try again.');
                 }

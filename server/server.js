@@ -11,6 +11,7 @@ const corsOptions = {
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
+//queries for users
 const users = [{
   'id': 1,
   'name': 'David',
@@ -37,6 +38,28 @@ app.post('/api/users', (req, res) => {
   } else {
     res.status(401).json({ message: 'Login failed', status: 0 });
   }
+});
+
+//queries for conversations
+
+const chats = [
+  {
+    id: 1,
+    name: 'David',
+    userid: 1,
+    message: 'Hi Mark!',
+    isUser: null
+  },
+  {
+    id: 2,
+    name: 'Mark',
+    userid: 2,
+    message: 'Hi Dave!',
+    isUser: null
+  }
+]
+app.get('/api/chats', (req, res)=>{
+  res.json(chats);
 });
 
 // app.get('/api/users', (req, res) => {
