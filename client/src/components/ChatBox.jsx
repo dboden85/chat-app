@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './ChatBox.module.css';
 
 const ChatBox = (props) => {
-  props.newMess.current = 'boop';
   return (
     <div className={classes['chat-box']}>
 
