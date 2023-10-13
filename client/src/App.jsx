@@ -1,20 +1,52 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useReducer } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Conversation from './components/Conversation'
 import ChatBox from './components/ChatBox'
 import Login from './components/Login'
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [convo, setConvo] = useState([])
-  const [currentUser, setCurrentUser] = useState()
-  const newMessage = useRef('');
+let userObject = sessionStorage.getItem('currentUser') && JSON.parse(sessionStorage.getItem('currentUser'));
 
-  //set login state based on sessionStorage
-  useEffect(()=>{
-    setIsLoggedIn(sessionStorage.getItem("isLoggedIn"));
-  },[]);
+const defaultLoginState = {
+  currentUser: {
+    id: userObject && userObject.id,
+    name: userObject && userObject.name
+  },
+  isLoggedIn: sessionStorage.getItem('isLoggedIn') === 'true' ? true : false,
+}
+
+const loginReducer = (state, action) =>{
+  if(action.type === 'LOGIN'){
+    sessionStorage.setItem('isLoggedIn', true);
+    sessionStorage.setItem('currentUser', JSON.stringify({id: action.data.id, name: action.data.name}))
+    return{
+      currentUser: {
+        id: action.data.id,
+        name: action.data.name
+      },
+      isLoggedIn: true
+    };
+  }
+
+  if(action.type === 'LOGOUT'){
+    sessionStorage.setItem('isLoggedIn', false);
+    userObject = {};
+    return {
+      currentUser: {
+        id: '',
+        name: ''
+      },
+      isLoggedIn: false
+    };
+  }
+
+  return defaultLoginState;
+}
+
+function App() {
+  const [loginState, dispatchLoginAction] = useReducer(loginReducer, defaultLoginState);
+  const [convo, setConvo] = useState([])
+  const newMessage = useRef('');
 
   //when the message text changes this will update the ref
   const messageChangeHandler = e =>{
@@ -37,23 +69,22 @@ function App() {
   //manages the events on login
   const loginHandler = (data)=>{
     if(data.status){
-      setIsLoggedIn(true);
-      setCurrentUser({
-        id: data.id,
-        name: data.name
-      });
-      sessionStorage.setItem("isLoggedIn", true)
+      dispatchLoginAction({type: 'LOGIN', data: data});
     }else{
-      setIsLoggedIn(false);
     }
     
   }
 
+  //manages events on logout.
+  const logoutHander = ()=>{
+    dispatchLoginAction({type: 'LOGOUT'});
+  }
+
   //when a conversation is pulled from the database this will mark them as the current user's message or not
   const manageConversations = (chats)=>{
-    if(currentUser){
+    if(loginState.currentUser.id){
       chats.map(chat => {
-        chat.userid === currentUser.id ? chat.isUser = true : chat.isUser = false;
+        chat.userid === loginState.currentUser.id ? chat.isUser = true : chat.isUser = false;
       })
       setConvo(chats);
     }
@@ -62,7 +93,7 @@ function App() {
   //will pull conversations from db when site loads or when currentUser state is changed.
   useEffect(()=>{
     getChat();
-  },[currentUser]);
+  },[loginState.currentUser.id]);
 
   //separated the fetch to retrieve convos from db because we might need to do this more than once.
   const getChat = ()=>{
@@ -84,9 +115,9 @@ function App() {
   
   return (
       <div className="app">
-        {!isLoggedIn ? <Login setLogin={loginHandler} /> :
+        {!loginState.isLoggedIn ? <Login setLogin={loginHandler} /> :
         <div className='app-container'>
-          <Header setLogin={loginHandler}/>
+          <Header setLogin={logoutHander}/>
           <Conversation chats={convo}/>
           <ChatBox onClick={messageClickHandler} newMess={messageChangeHandler}/>
         </div>
@@ -94,6 +125,8 @@ function App() {
         
       </div>
   )
+
+  
 }
 
 export default App
