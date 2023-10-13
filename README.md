@@ -7,13 +7,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Dave is a bitch!
-No, Mark is a huge bitch!
-
-bloop blooop
-
-ho bag!
-
 if you are cloning from github you will need the following:
 
 You will need to add these dependencies in the client directory order for the app to work.
