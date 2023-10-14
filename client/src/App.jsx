@@ -97,8 +97,11 @@ function App() {
           }
       )
   }
-
-  setInterval(getChat(), 500);
+  
+  if(loginState.currentUser.id){
+    setInterval(getChat(), 500);
+  }
+  
   
   return (
       <div className="app">
