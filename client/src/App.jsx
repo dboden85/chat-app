@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useReducer } from 'react'
+import React,{ useState, useEffect, useReducer } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Conversation from './components/Conversation'
@@ -46,23 +46,11 @@ const loginReducer = (state, action) =>{
 function App() {
   const [loginState, dispatchLoginAction] = useReducer(loginReducer, defaultLoginState);
   const [convo, setConvo] = useState([])
-  let newMessage = '';
 
-  //when the message text changes this will update the ref
-  const messageChangeHandler = e =>{
-    newMessage = e.target.value;
-  }
 
   //add new to message to the conversation
-  const messageClickHandler = e => {
-    e.preventDefault();
-
-    setConvo([...convo,{
-      id: 'c3',
-      name: 'David',
-      message: newMessage,
-      isUser: true
-    }])
+  const messageClickHandler = message => {
+    getChat();
   }
 
 
@@ -70,9 +58,7 @@ function App() {
   const loginHandler = (data)=>{
     if(data.status){
       dispatchLoginAction({type: 'LOGIN', data: data});
-    }else{
     }
-    
   }
 
   //manages events on logout.
@@ -119,7 +105,7 @@ function App() {
         <div className='app-container'>
           <Header setLogin={logoutHandler}/>
           <Conversation chats={convo}/>
-          <ChatBox onClick={messageClickHandler} newMess={messageChangeHandler}/>
+          <ChatBox uid={loginState.currentUser.id} uname={loginState.currentUser.name} onSubmit={messageClickHandler}/>
         </div>
         }
         
