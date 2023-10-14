@@ -10,7 +10,7 @@ function onSubmitHandler(e) {
 
   e.preventDefault();
 
-  fetch('http://localhost:5000/api/chats', {
+  fetch('http://192.168.1.183:5000/api/chats', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

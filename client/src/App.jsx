@@ -53,7 +53,6 @@ function App() {
     getChat();
   }
 
-
   //manages the events on login
   const loginHandler = (data)=>{
     if(data.status){
@@ -83,7 +82,7 @@ function App() {
 
   //separated the fetch to retrieve convos from db because we might need to do this more than once.
   const getChat = ()=>{
-    fetch('http://localhost:5000/api/chats')
+    fetch('http://192.168.1.183:5000/api/chats')
       .then(
           response => response.json()
       )
@@ -98,6 +97,8 @@ function App() {
           }
       )
   }
+
+  setInterval(getChat(), 500);
   
   return (
       <div className="app">
