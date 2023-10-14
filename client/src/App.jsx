@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useReducer } from 'react'
+import React,{ useState, useEffect, useReducer } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Conversation from './components/Conversation'
@@ -46,23 +46,14 @@ const loginReducer = (state, action) =>{
 function App() {
   const [loginState, dispatchLoginAction] = useReducer(loginReducer, defaultLoginState);
   const [convo, setConvo] = useState([])
-  let newMessage = '';
 
-  //when the message text changes this will update the ref
-  const messageChangeHandler = e =>{
-    newMessage = e.target.value;
-  }
+  console.log(loginState.currentUser.id)
+
 
   //add new to message to the conversation
-  const messageClickHandler = e => {
-    e.preventDefault();
+  const messageClickHandler = message => {
 
-    setConvo([...convo,{
-      id: 'c3',
-      name: 'David',
-      message: newMessage,
-      isUser: true
-    }])
+    setConvo([message])
   }
 
 
@@ -70,9 +61,7 @@ function App() {
   const loginHandler = (data)=>{
     if(data.status){
       dispatchLoginAction({type: 'LOGIN', data: data});
-    }else{
     }
-    
   }
 
   //manages events on logout.
@@ -91,9 +80,9 @@ function App() {
   }
 
   //will pull conversations from db when site loads or when currentUser state is changed.
-  useEffect(()=>{
-    getChat();
-  },[loginState.currentUser]);
+  // useEffect(()=>{
+  //   getChat();
+  // },[loginState.currentUser]);
 
   //separated the fetch to retrieve convos from db because we might need to do this more than once.
   const getChat = ()=>{
@@ -119,7 +108,7 @@ function App() {
         <div className='app-container'>
           <Header setLogin={logoutHandler}/>
           <Conversation chats={convo}/>
-          <ChatBox onClick={messageClickHandler} newMess={messageChangeHandler}/>
+          <ChatBox uid={loginState.currentUser.id} uname={loginState.currentUser.name} onClick={messageClickHandler}/>
         </div>
         }
         
