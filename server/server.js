@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-// const corsOptions = {
-//   origin: 'http://localhost:5173',
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 //queries for users
 const users = [{
@@ -42,7 +42,7 @@ app.post('/api/users', (req, res) => {
 
 //queries for conversations
 
-const chats = [
+let chats = [
   {
     id: 1,
     name: 'David',
@@ -58,8 +58,24 @@ const chats = [
     isUser: null
   }
 ]
+
+
 app.get('/api/chats', (req, res)=>{
   res.json(chats);
+});
+
+app.post('/api/chats', (req, res) =>{
+  const{ message } = req.body
+  const messObj = {
+    id: 2,
+    name: 'Mark',
+    userid: 2,
+    message: 'Hi!',
+    isUser: null
+  }
+
+  // chats.push(messObj)
+  res.status(200).json({ message: message });
 });
 
 // app.get('/api/users', (req, res) => {
