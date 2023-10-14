@@ -47,13 +47,10 @@ function App() {
   const [loginState, dispatchLoginAction] = useReducer(loginReducer, defaultLoginState);
   const [convo, setConvo] = useState([])
 
-  console.log(loginState.currentUser.id)
-
 
   //add new to message to the conversation
   const messageClickHandler = message => {
-
-    setConvo([message])
+    getChat();
   }
 
 
@@ -80,9 +77,9 @@ function App() {
   }
 
   //will pull conversations from db when site loads or when currentUser state is changed.
-  // useEffect(()=>{
-  //   getChat();
-  // },[loginState.currentUser]);
+  useEffect(()=>{
+    getChat();
+  },[loginState.currentUser]);
 
   //separated the fetch to retrieve convos from db because we might need to do this more than once.
   const getChat = ()=>{
@@ -108,7 +105,7 @@ function App() {
         <div className='app-container'>
           <Header setLogin={logoutHandler}/>
           <Conversation chats={convo}/>
-          <ChatBox uid={loginState.currentUser.id} uname={loginState.currentUser.name} onClick={messageClickHandler}/>
+          <ChatBox uid={loginState.currentUser.id} uname={loginState.currentUser.name} onSubmit={messageClickHandler}/>
         </div>
         }
         

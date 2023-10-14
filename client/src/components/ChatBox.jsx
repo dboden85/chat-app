@@ -5,26 +5,27 @@ import classes from './ChatBox.module.css';
 const ChatBox = (props) => {
   const messRef = useRef()
 
-  console.log(props.uid);
-  console.log(props.uname);
 
-function onSubmitHandler() {
-  // fetch('http://localhost:5000/api/chats', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   // body: JSON.stringify({'mess': messRef.current.value, 'uid': props.uid, 'uname': props.uname})
-  // })
-  // .then(
-  //     response => response.json()
-  // )
-  // .then(
-  //   data => {
-  //     // props.messSubmit(data)
-  //     console.log(data);
-  //   }
-  // )
+function onSubmitHandler(e) {
+
+  e.preventDefault();
+
+  fetch('http://localhost:5000/api/chats', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({'mess': messRef.current.value, uid: props.uid, uname: props.uname})
+  })
+  .then(
+      response => response.json()
+  )
+  .then(
+    data => {
+      props.onSubmit()
+      console.log(data);
+    }
+  )
 
   console.log(messRef.current.value)
 }

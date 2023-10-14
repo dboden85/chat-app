@@ -9,7 +9,7 @@ const corsOptions = {
 }
 
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 //queries for users
 const users = [{
@@ -65,17 +65,17 @@ app.get('/api/chats', (req, res)=>{
 });
 
 app.post('/api/chats', (req, res) =>{
-  const{ message } = req.body
+  const{ mess, uid, uname } = req.body
   const messObj = {
-    id: 2,
-    name: 'Mark',
-    userid: 2,
-    message: 'Hi!',
+    id: chats.length + 1,
+    name: uname,
+    userid: uid,
+    message: mess,
     isUser: null
   }
 
-  // chats.push(messObj)
-  res.status(200).json({ message: message });
+  chats.push(messObj)
+  res.status(200).json({ chats });
 });
 
 // app.get('/api/users', (req, res) => {
