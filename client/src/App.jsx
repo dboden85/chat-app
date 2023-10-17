@@ -3,7 +3,7 @@ import './App.css'
 import Header from './components/Header'
 import Conversation from './components/Conversation'
 import ChatBox from './components/ChatBox'
-import Login from './components/Login'
+import Login from './components/login/Login'
 
 let userObject = sessionStorage.getItem('currentUser') && JSON.parse(sessionStorage.getItem('currentUser'));
 
@@ -76,13 +76,13 @@ function App() {
   }
 
   //will pull conversations from db when site loads or when currentUser state is changed.
-  useEffect(()=>{
-    getChat();
-  },[loginState.currentUser]);
+  // useEffect(()=>{
+  //   getChat();
+  // },[loginState.currentUser]);
 
   //separated the fetch to retrieve convos from db because we might need to do this more than once.
   const getChat = ()=>{
-    fetch('http://192.168.1.183:5000/api/chats')
+    fetch('http://localhost:5000/api/chats')
       .then(
           response => response.json()
       )
