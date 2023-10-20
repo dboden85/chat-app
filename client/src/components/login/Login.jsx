@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import classes from './Login.module.css';
+import LoginProvider from "./LoginProvider";
 
 
 const Login = (props) => {
@@ -51,26 +52,9 @@ const Login = (props) => {
             )
     }
 
-    // const getUsers = ()=>{
-    //     fetch('http://localhost:5000/api/users')
-    //         .then(
-    //             response => response.json()
-    //         )
-    //         .then(
-    //             data => {
-    //             // console.log(data);
-    //             console.log(data)
-    //             }
-    //         )
-    //         .catch(
-    //             err =>{
-    //             alert(err  + '\nLet Dave or Mark know');
-    //             }
-    //         )
-    // }
-
 
     return(
+        <LoginProvider>
         <div className={classes['login-container']}>
             <h2>Chat Login</h2>
             <form className={classes.loginform} action="/" onSubmit={onSubmitHandler}>
@@ -81,6 +65,7 @@ const Login = (props) => {
                 <input className={classes.submit} type="submit" />
             </form>
         </div>
+        </LoginProvider>
     )
 }
 export default Login;
