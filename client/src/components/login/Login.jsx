@@ -1,11 +1,12 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
 import classes from './Login.module.css';
-import LoginProvider from "./LoginProvider";
+import LoginContext from "./login-context";
 
 
 const Login = (props) => {
-    const [userName, setUserName] = useState(null);
-    const [userPass, setUserPass] = useState(null);
+    let userName = useRef();
+    let userPass = useRef();
+    const loginCtx = useContext(LoginContext);
 
     const userNameChangeHandler = (e)=>{
         setUserName(e.target.value);
@@ -17,7 +18,10 @@ const Login = (props) => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
+        userName = userName.current.value;
+        userPass = userPass.current.value;
         if(userName && userPass){
+            console.log(userName + ' ' + userPass)
             getUsers();
         }else{
             alert('Missing Info')
@@ -39,7 +43,8 @@ const Login = (props) => {
             .then(
                 data => {
                 if(data.status){
-                    props.setLogin(data);
+                    console.log('Data: ' + data.message)
+                    loginCtx.login(data);
                 }else{
                     alert('Please Check your login info and try again.');
                 }
@@ -47,25 +52,23 @@ const Login = (props) => {
             )
             .catch(
                 err =>{
-                alert(err  + '\nLet Dave or Mark know');
+                console.log(err  + '\nLet Dave or Mark know');
                 }
             )
     }
 
 
     return(
-        <LoginProvider>
         <div className={classes['login-container']}>
             <h2>Chat Login</h2>
             <form className={classes.loginform} action="/" onSubmit={onSubmitHandler}>
                 <label htmlFor="uname">Username</label>
-                <input onChange={userNameChangeHandler} type="text" id="uname" />
+                <input ref={userName} type="text" id="uname" />
                 <label htmlFor="pass">Password</label>
-                <input onChange={userPassChangeHandler} type="password" id="pass" />
+                <input ref={userPass} type="password" id="pass" />
                 <input className={classes.submit} type="submit" />
             </form>
         </div>
-        </LoginProvider>
     )
 }
 export default Login;

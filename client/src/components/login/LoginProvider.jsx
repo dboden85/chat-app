@@ -26,6 +26,7 @@ const loginReducer = (state, action) =>{
 
     if(action.type === 'LOGOUT'){
         sessionStorage.setItem('isLoggedIn', false);
+        sessionStorage.setItem('currentUser', '')
         userObject = {};
         return {
         currentUser: {
