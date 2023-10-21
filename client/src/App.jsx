@@ -11,8 +11,6 @@ function App() {
   const [convo, setConvo] = useState([])
   const loginCtx = useContext(LoginContext);
 
-  alert('I like boobies');
-
 
   //add new to message to the conversation
   const messageClickHandler = message => {
@@ -46,6 +44,10 @@ function App() {
           alert(err  + '\nLet Dave or Mark know');
           }
       )
+  }
+
+  if(loginCtx.isLoggedIn){
+    setInterval(getChat, 500);
   }
   
   
