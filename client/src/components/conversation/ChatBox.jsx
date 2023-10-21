@@ -1,27 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import classes from './ChatBox.module.css';
+import LoginContext from '../login/login-context';
 
 const ChatBox = (props) => {
   const messRef = useRef();
+  const loginCtx = useContext(LoginContext);
 
   function onSubmitHandler(e) {
     e.preventDefault();
 
-    fetch('http://chat.david-boden.com:5000/api/chats', {
+    fetch('http://' + props.url + ':5000/api/chats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ mess: messRef.current.value, uid: props.uid, uname: props.uname }),
+      body: JSON.stringify({ mess: messRef.current.value, uid: loginCtx.currentUser.id, uname: loginCtx.currentUser.name }),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(() => {
         props.onSubmit();
-        console.log(data);
         messRef.current.value = ''; // Clear the text area
       });
-
-    console.log(messRef.current.value);
   }
 
   function handleKeyPress(e) {

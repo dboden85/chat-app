@@ -3,7 +3,7 @@ import classes from './Login.module.css';
 import LoginContext from "./login-context";
 
 
-const Login = () => {
+const Login = (props) => {
     let userName = useRef();
     let userPass = useRef();
     const loginCtx = useContext(LoginContext);
@@ -21,7 +21,7 @@ const Login = () => {
     }
 
     const getUsers = ()=>{
-        fetch('http://chat.david-boden.com:5000/api/users',{
+        fetch('http://' + props.url + ':5000/api/users',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

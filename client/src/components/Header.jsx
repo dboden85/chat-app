@@ -2,9 +2,8 @@ import React, { useContext } from 'react';
 import classes from "./Header.module.css";
 import LoginContext from './login/login-context';
 
-const Header = (props) => {
+const Header = () => {
   const loginCtx = useContext(LoginContext);
-  console.log(loginCtx)
 
   return (
     <div className={classes.header}>
