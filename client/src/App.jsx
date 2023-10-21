@@ -82,7 +82,7 @@ function App() {
 
   //separated the fetch to retrieve convos from db because we might need to do this more than once.
   const getChat = ()=>{
-    fetch('http://192.168.1.183:5000/api/chats')
+    fetch('http://chat.david-boden.com:5000/api/chats')
       .then(
           response => response.json()
       )

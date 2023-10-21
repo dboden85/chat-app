@@ -7,7 +7,7 @@ const ChatBox = (props) => {
   function onSubmitHandler(e) {
     e.preventDefault();
 
-    fetch('http://192.168.1.183:5000/api/chats', {
+    fetch('http://chat.david-boden.com:5000/api/chats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
