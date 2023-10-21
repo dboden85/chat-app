@@ -11,6 +11,8 @@ function App() {
   const [convo, setConvo] = useState([])
   const loginCtx = useContext(LoginContext);
 
+  alert('I like boobies');
+
 
   //add new to message to the conversation
   const messageClickHandler = message => {
