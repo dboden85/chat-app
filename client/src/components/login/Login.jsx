@@ -30,7 +30,7 @@ const Login = (props) => {
     }
 
     const getUsers = ()=>{
-        fetch('http://localhost:5000/api/users',{
+        fetch('http://chat.david-boden.com:5000/api/users',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
