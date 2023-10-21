@@ -1,27 +1,18 @@
-import React, {useState, useEffect, useRef, useContext} from "react";
+import React, {useRef, useContext} from "react";
 import classes from './Login.module.css';
 import LoginContext from "./login-context";
 
 
-const Login = (props) => {
+const Login = () => {
     let userName = useRef();
     let userPass = useRef();
     const loginCtx = useContext(LoginContext);
-
-    const userNameChangeHandler = (e)=>{
-        setUserName(e.target.value);
-    }
-
-    const userPassChangeHandler = (e)=>{
-        setUserPass(e.target.value);
-    }
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
         userName = userName.current.value;
         userPass = userPass.current.value;
         if(userName && userPass){
-            console.log(userName + ' ' + userPass)
             getUsers();
         }else{
             alert('Missing Info')
@@ -52,7 +43,7 @@ const Login = (props) => {
             )
             .catch(
                 err =>{
-                console.log(err  + '\nLet Dave or Mark know');
+                console.error(err  + '\nLet Dave or Mark know');
                 }
             )
     }

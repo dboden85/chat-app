@@ -1,8 +1,8 @@
 import React,{ useState, useEffect, useReducer, useContext } from 'react'
 import './App.css'
 import Header from './components/Header'
-import Conversation from './components/Conversation'
-import ChatBox from './components/ChatBox'
+import Conversation from './components/conversation/Conversation'
+import ChatBox from './components/conversation/ChatBox'
 import Login from './components/login/Login'
 import LoginContext from './components/login/login-context'
 
