@@ -1,7 +1,17 @@
 const express = require('express');
+const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
+
+// Create a MySQL database connection
+const db = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'dboden',
+  password: 'davbod12',
+  database: 'mdchatdb',
+  // port: '5000',
+});
 
 const corsOptions = {
   origin: 'http://localhost:5173',
@@ -12,73 +22,130 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //queries for users
-const users = [{
-  'id': 1,
-  'name': 'David',
-  'username': 'dboden',
-  'password': 'awesome'
-},
-{
-  'id': 2,
-  'name': 'Mark',
-  'username': 'mnoesen',
-  'password': 'iheartdudes'
-}]
+// const users = [{
+//   'id': 1,
+//   'name': 'David',
+//   'username': 'dboden',
+//   'password': 'awesome'
+// },
+// {
+//   'id': 2,
+//   'name': 'Mark',
+//   'username': 'mnoesen',
+//   'password': 'iheartdudes'
+// }]
+
+// app.get('/api/users', (req, res) => {
+//   res.json(users);
+// });
 
 app.get('/api/users', (req, res) => {
-  res.json(users);
+  // Execute a SQL query to fetch data from the database
+  const query = 'SELECT * FROM users';
+  db.query(query, (error, results) => {
+    if (error) {
+      console.error('Error executing query: ' + error);
+      res.status(500).send('Error fetching data from the database');
+    } else {
+      res.json(results);
+    }
+  });
 });
+
+// app.post('/api/users', (req, res) => {
+//   const { username, pass } = req.body;
+//   const user = users.find((user) => user.username === username && user.password === pass);
+
+//   if (user) {
+//     res.status(200).json({ message: 'Login successful', name: user.name, id: user.id, status: 1 });
+//   } else {
+//     res.status(401).json({ message: 'Login failed', status: 0 });
+//   }
+// });
 
 app.post('/api/users', (req, res) => {
   const { username, pass } = req.body;
-  const user = users.find((user) => user.username === username && user.password === pass);
+  const query = 'SELECT * FROM users WHERE username = ? AND password = ?;';
 
-  if (user) {
-    res.status(200).json({ message: 'Login successful', name: user.name, id: user.id, status: 1 });
-  } else {
-    res.status(401).json({ message: 'Login failed', status: 0 });
-  }
+  db.query(query, [username, pass], (error, results) => {
+    if (error) {
+      console.error('Error executing query: ' + error);
+      res.status(500).send('Error during authentication');
+    } else {
+      if (results.length === 1) {
+        res.status(200).json({ message: 'Login successful', name: results[0].name, id: results[0].id, status: 1 });
+      } else {
+        res.status(401).json({ message: 'Login failed', status: 0 });
+      }
+    }
+  });
 });
 
 //queries for conversations
 
-let chats = [
-  {
-    id: 1,
-    name: 'David',
-    userid: 1,
-    message: 'Hi Mark!',
-    isUser: null
-  },
-  {
-    id: 2,
-    name: 'Mark',
-    userid: 2,
-    message: 'Hi Dave!',
-    isUser: null
-  }
-]
+// let chats = [
+//   {
+//     id: 1,
+//     name: 'David',
+//     userid: 1,
+//     message: 'Hi Mark!',
+//     isUser: null
+//   },
+//   {
+//     id: 2,
+//     name: 'Mark',
+//     userid: 2,
+//     message: 'Hi Dave!',
+//     isUser: null
+//   }
+// ]
 
 
 app.get('/api/chats', (req, res)=>{
-  res.json(chats);
+  // Execute a SQL query to fetch data from the database
+  const query = 'SELECT * FROM chats';
+  db.query(query, (error, results) => {
+    if (error) {
+      console.error('Error executing query: ' + error);
+      res.status(500).send('Error fetching data from the database');
+    } else {
+      res.json(results);
+    }
+  });
 });
 
 app.post('/api/chats', (req, res) =>{
   const{ mess, uid, uname } = req.body
-  const messObj = {
-    id: chats.length + 1,
-    name: uname,
-    userid: uid,
-    message: mess,
-    isUser: null
-  }
+  const query = 'INSERT INTO chats (name, userid, message) VALUES(?, ?, ?);';
 
-  chats.push(messObj)
-  res.status(200).json({ chats });
+  db.query(query, [uname, uid, mess], (error, results) => {
+    if (error) {
+      console.error('Error executing query: ' + error);
+      res.status(500).send('Error with sending text');
+    } else {
+      if (results.length === 1) {
+        res.status(200).json({ message: 'Message sent successfully'});
+      } else {
+        res.status(401).json({ message: 'Messag failed'});
+      }
+    }
+  });
+
+
+
+  // const messObj = {
+  //   id: chats.length + 1,
+  //   name: uname,
+  //   userid: uid,
+  //   message: mess,
+  //   isUser: null
+  // }
+
+  // chats.push(messObj)
+  // res.status(200).json({ chats });
 });
 
-// app.get('/api/users', (req, res) => {
+// app.get('/api/users', (req, res) => {mys
 //   const apiDetails = 'http://192.168.0.121:5000/api/users';
 //   // res.set('Access-Control-Allow-Origin', 'http://192.168.0.121:5173/');
 //   res.send({

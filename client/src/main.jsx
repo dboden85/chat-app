@@ -5,7 +5,9 @@ import './index.css'
 import LoginProvider from './components/login/LoginProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
   <LoginProvider>
   <App />
   </LoginProvider>
+  </React.StrictMode>
 )

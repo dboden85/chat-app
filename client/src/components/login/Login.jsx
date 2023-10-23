@@ -21,6 +21,7 @@ const Login = (props) => {
     }
 
     const getUsers = ()=>{
+        console.log(userName + ' ' + userPass)
         fetch('http://' + props.url + ':5000/api/users',{
             method: 'POST',
             headers: {
@@ -34,7 +35,7 @@ const Login = (props) => {
             .then(
                 data => {
                 if(data.status){
-                    console.log('Data: ' + data.message)
+                    console.log(data)
                     loginCtx.login(data);
                 }else{
                     alert('Please Check your login info and try again.');

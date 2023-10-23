@@ -18,7 +18,7 @@ const ChatBox = (props) => {
     })
       .then((response) => response.json())
       .then(() => {
-        props.onSubmit();
+        // props.onSubmit();
         messRef.current.value = ''; // Clear the text area
       });
   }

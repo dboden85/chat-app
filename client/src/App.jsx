@@ -5,7 +5,7 @@ import Conversation from './components/conversation/Conversation'
 import Login from './components/login/Login'
 import LoginContext from './components/login/login-context'
 
-const url = 'localhost';
+const url = 'chat.david-boden.com';
 function App() {
   const loginCtx = useContext(LoginContext);
   
