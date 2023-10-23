@@ -60,6 +60,10 @@ const Login = (props) => {
                 <input ref={userPass} type="password" id="pass" />
                 <input className={classes.submit} type="submit" />
             </form>
+            <h2>Chat Signup</h2>
+            <form className={classes.loginform} onSubmit={onSignupHandler}>
+                <label htmlfor="fname">First Name</label>
+            </form>
         </div>
     )
 }

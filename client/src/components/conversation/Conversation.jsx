@@ -49,6 +49,10 @@ const Conversation = (props) => {
 
   setInterval(getChat(), 1000);
 
+  useEffect(()=>{
+    setInterval(getChat(), 1000);
+  },[]);
+
   return (
     <React.Fragment>
     <div className={classes['convo-box']}>
