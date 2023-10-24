@@ -47,9 +47,9 @@ const Conversation = (props) => {
     }
   }, [convo]);
 
-  // useEffect(()=>{
-  //   setInterval(getChat(), 1000);
-  // },[]);
+  useEffect(()=>{
+    setInterval(getChat(), 1000);
+  },[]);
 
   return (
     <React.Fragment>
