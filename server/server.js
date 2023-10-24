@@ -63,9 +63,10 @@ app.get('/api/users', (req, res) => {
 //   }
 // });
 
-app.post('/api/users', (req, res) => {
+app.post('/api/login', (req, res) => {
   const { username, pass } = req.body;
   const query = 'SELECT * FROM users WHERE username = ? AND password = ?;';
+  
 
   db.query(query, [username, pass], (error, results) => {
     if (error) {
@@ -80,6 +81,36 @@ app.post('/api/users', (req, res) => {
     }
   });
 });
+
+app.post('/api/signup', (req, res) =>{
+  const {fname, lname, username, pass} = req.body;
+  const query = 'SELECT * FROM users WHERE username = ?;';
+  const addUserQuery = 'INSERT INTO users(name, username, password) VALUES(? ?, ?, ?);';
+
+  db.query(query, [username], (error, results) =>{
+    if(error){
+      console.error('Error executing query: ' + error);
+      res.status(500).send('Error during query');
+    }else{
+      if(results.length > 0){
+        res.status(200).json({message: 'That username is already in use', status: 0});
+      }else{
+        db.addUserQuery(addUserQuery, [fname, lname, username, pass], (error, aResults) =>{
+          if(error){
+            console.error('Error while trying to add new user' + error);
+            res.status(500).send('Error adding new user');
+          }else{
+            if(aResults){
+              res.status(200).json({message: 'New User Created', status: 1})
+            }else{
+              res.status(401).json({message: 'User not added', status: 0})
+            }
+          }
+        })
+      }
+    }
+  })
+})
 
 //queries for conversations
 
@@ -126,7 +157,7 @@ app.post('/api/chats', (req, res) =>{
       if (results.length === 1) {
         res.status(200).json({ message: 'Message sent successfully'});
       } else {
-        res.status(401).json({ message: 'Messag failed'});
+        res.status(401).json({ message: 'Message failed'});
       }
     }
   });
