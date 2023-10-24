@@ -95,7 +95,7 @@ app.post('/api/signup', (req, res) =>{
       if(results.length > 0){
         res.status(200).json({message: 'That username is already in use', status: 0});
       }else{
-        db.addUserQuery(addUserQuery, [fname, lname, username, pass], (error, aResults) =>{
+        db.query(addUserQuery, [fname, lname, username, pass], (error, aResults) =>{
           if(error){
             console.error('Error while trying to add new user' + error);
             res.status(500).send('Error adding new user');
