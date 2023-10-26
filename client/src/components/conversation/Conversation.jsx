@@ -8,11 +8,6 @@ const Conversation = (props) => {
   const convoRef = useRef(null);
   const loginCtx = useContext(LoginContext);
 
-  //add new to message to the conversation
-  const messageClickHandler = () => {
-    getChat();
-  }
-
   //when a conversation is pulled from the database this will mark them as the current user's message or not
   const manageConversations = (chats)=>{
     if(loginCtx.currentUser){
@@ -35,7 +30,7 @@ const Conversation = (props) => {
       )
       .catch(
           err =>{
-          alert(err  + '\nLet Dave or Mark know');
+          console.log(err  + '\nLet Dave or Mark know');
           }
       )
   }
@@ -47,8 +42,7 @@ const Conversation = (props) => {
     }
   }, [convo]);
 
-
-  setInterval(getChat, 1000);
+  getChat();
 
   return (
     <React.Fragment>
@@ -66,7 +60,7 @@ const Conversation = (props) => {
         }
       </div>
     </div>
-    <ChatBox url={props.url} onSubmit={messageClickHandler}/>
+    <ChatBox url={props.url}/>
     </React.Fragment>
   );
 }
