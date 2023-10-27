@@ -60,7 +60,7 @@ const LoginProvider = props => {
             id: loginState.currentUser.id,
             name: loginState.currentUser.name
         },
-        isLoggedIn: true, //loginState.isLoggedIn,
+        isLoggedIn: loginState.isLoggedIn,
         login: loginHandler,
         logout: logoutHandler
     }

@@ -10,7 +10,7 @@ height: 100%;
 background-color: rgb(201, 197, 197);
 overflow: scroll;
 overflow-anchor: auto;
-scroll-behavior: smooth;
+/* scroll-behavior: smooth; */
 }
 
 .right, .left{
