@@ -11,9 +11,10 @@ function App() {
   
   return (
       <div className="app">
+        <Header/>
         {!loginCtx.isLoggedIn ? <Login url={url} /> :
         <div className='app-container'>
-          <Header/>
+          
           <Conversation url={url}/>
         </div>
         }

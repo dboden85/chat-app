@@ -1,6 +1,7 @@
 import React, { useRef, useContext } from 'react';
 import classes from './ChatBox.module.css';
 import LoginContext from '../login/login-context';
+import plane from '../../assets/images/paper-plane.svg';
 
 const ChatBox = (props) => {
   const messRef = useRef();
@@ -36,7 +37,7 @@ const ChatBox = (props) => {
           <textarea ref={messRef} placeholder="Enter Text Here." onKeyPress={handleKeyPress}></textarea>
         </div>
         <div className={classes['sendbutton-container']}>
-          <input type="submit" value="Send" />
+          <input type="image" src={plane} width="30" height="30" />
         </div>
       </form>
     </div>

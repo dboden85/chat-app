@@ -7,13 +7,12 @@ const Header = () => {
 
   return (
     <div className={classes.header}>
-      <div className={classes['signout-container']}>
-        <button onClick={loginCtx.logout} className={classes.btn}>Sign Out</button>
-      </div>
       <div className={classes['title-container']}>
         <h1>MD CHAT</h1>
       </div>
-      
+      <div className={classes['signout-container']}>
+        <button onClick={loginCtx.logout} className={classes.btn}>Sign Out</button>
+      </div>     
     </div>
   )
 }

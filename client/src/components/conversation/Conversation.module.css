@@ -1,16 +1,13 @@
 .convo-box {
     width: 100%;
     height: 100%;
-    padding: 20px;
     background-color: gray; /* Updated solid background color */
 }
 
 .convo-box .convos {
 width: 100%;
-height: 500px;
+height: 100%;
 background-color: rgb(201, 197, 197);
-border: 3px solid #858282;
-border-radius: 20px;
 overflow: scroll;
 overflow-anchor: auto;
 scroll-behavior: smooth;

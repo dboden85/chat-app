@@ -1,7 +1,9 @@
 .header {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 150px;
   padding: 20px;
   background-color: #196896;
 }
@@ -9,12 +11,13 @@
 .header .signout-container{
   width: 100%;
   max-width: max-content;
-  height: 100%;
+  height: auto;
 }
 
 .header .signout-container .btn{
   width: 200px;
-  height: 100%;
+  height: auto;
+  padding: 10px;
   background-color: #000;
   color: #fff;
   font-size: 20px;
