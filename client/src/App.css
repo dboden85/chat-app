@@ -13,7 +13,7 @@
   width: 100%;
   /* max-width: 800px; */
   height: 100%;
-  max-height: calc(100% - 100px);
+  max-height: calc(100% - 500px);
   background-color: aqua;
   overflow: hidden;
 }
