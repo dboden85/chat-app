@@ -13,18 +13,18 @@
 }
 
 .chat-box .text {
-flex-grow: 1;
+    flex-grow: 1;
 }
 
 .chat-box .text textarea {
-width: 100%;
-height: 100%;
-border: 2px solid #000;
-border-radius: 20px;
-font-size: 18px;
-padding: 5px;
-padding-right: 70px;
-resize: none; /* Prevent the textarea from being resized by the user */
+    width: 100%;
+    height: 100%;
+    border: 2px solid #000;
+    border-radius: 20px;
+    font-size: 18px;
+    padding: 5px;
+    padding-right: 70px;
+    resize: none; /* Prevent the textarea from being resized by the user */
 }
 
 .chat-box .sendbutton-container {
@@ -40,20 +40,13 @@ resize: none; /* Prevent the textarea from being resized by the user */
     transform: translateY(-50%);
 }
 
-/* .chat-box .sendbutton-container input {
-width: 100%;
-height: 100%; */
-/* background-color: #af1616;
-color: #fff; */
-/* } */
-
 .chat-box .sendbutton-container input:hover {
-cursor: pointer;
-background-color: #fff;
-color: #000;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
 }
 
 .chat-box .sendbutton-container input:active {
-background-color: #800000;
-color: #fff;
+    background-color: #800000;
+    color: #fff;
 }
