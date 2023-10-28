@@ -42,8 +42,6 @@ const Conversation = (props) => {
     }
   }, [convo]);
 
-  getChat();
-
   return (
     <React.Fragment>
     <div className={classes['convo-box']}>
