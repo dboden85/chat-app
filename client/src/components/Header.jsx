@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import classes from "./Header.module.css";
 import LoginContext from './login/login-context';
+import logo from '../assets/images/md-logo.jpg';
 
 const Header = () => {
   const loginCtx = useContext(LoginContext);
@@ -8,7 +9,8 @@ const Header = () => {
   return (
     <div className={classes.header}>
       <div className={classes['title-container']}>
-        <h1>MD CHAT</h1>
+        {/* <h1>MD CHAT</h1> */}
+        <img className={classes.logo} src={logo} />
       </div>
       {loginCtx.isLoggedIn && <div className={classes['signout-container']}>
         <button onClick={loginCtx.logout} className={classes.btn}>Sign Out</button>
