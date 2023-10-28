@@ -2,10 +2,11 @@
     display: flex;
     width: 100%;
     height: 100px;
-    padding: 20px;
+    padding: 10px 5px;
     background-color: #196896;
     position: fixed;
     bottom: 0;
+    border-top: 2px solid #cc5500;
 }
 
 .chat-box form{
@@ -21,11 +22,11 @@
 .chat-box .text textarea {
     width: 100%;
     height: 100%;
-    border: 2px solid #000;
-    border-radius: 20px;
+    border-radius: 5px;
     font-size: 18px;
     padding: 5px;
     padding-right: 70px;
+    outline: none;
     resize: none; /* Prevent the textarea from being resized by the user */
 }
 
