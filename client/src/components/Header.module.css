@@ -5,7 +5,7 @@
   align-items: center;
   height: auto;
   padding: 20px;
-  /* background-color: #196896; */
+  background-color: #196896;
   /* border-bottom: 2px solid #cc5500; */
 }
 
@@ -42,12 +42,6 @@
 
 .header .title-container h1{
   color: #fff;
-}
-
-.logo{
-  width: 150px;
-  border: 3px solid #cc5500;
-  border-radius: 50%;
 }
 
 @media(min-width: 768px){

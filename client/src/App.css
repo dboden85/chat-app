@@ -11,6 +11,12 @@
   background-position: top center;
 }
 
+.logo{
+  width: 150px;
+  margin: 30px auto;
+  border-radius: 50%;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
