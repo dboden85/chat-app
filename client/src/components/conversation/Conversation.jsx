@@ -45,6 +45,8 @@ const Conversation = (props) => {
       }
     }
 
+    getChat();
+
   }, [convo]);
 
   useEffect(() => {
