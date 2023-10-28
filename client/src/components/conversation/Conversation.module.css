@@ -64,3 +64,9 @@ overflow-anchor: auto;
 .left .message{
     background-color: blue;
 }
+
+@media(min-width: 768px){
+    .convo-box {
+        max-height: calc(100vh - 196px);
+    }
+}

@@ -39,12 +39,14 @@
   scale: 99%;
 }
 
-.header .title-container{
-  display: flex;
-  justify-content: flex-end;
-  flex-grow: 1;
-}
-
 .header .title-container h1{
   color: #fff;
+}
+
+@media(min-width: 768px){
+  .header{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
