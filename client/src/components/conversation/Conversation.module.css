@@ -8,7 +8,11 @@
 .convo-box .convos {
 width: 100%;
 height: 100%;
-background-color: rgb(201, 197, 197);
+background-color: #fff;
+background-image: url('../../assets/images/fire.svg');
+background-repeat: no-repeat;
+background-position: center center;
+background-size: contain;
 overflow: scroll;
 overflow-anchor: auto;
 /* scroll-behavior: smooth; */
