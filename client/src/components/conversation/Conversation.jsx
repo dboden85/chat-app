@@ -7,6 +7,7 @@ const Conversation = (props) => {
   const [convo, setConvo] = useState([])
   const convoRef = useRef(null);
   const loginCtx = useContext(LoginContext);
+  const userScrolledUp = useRef(false); // Ref to track manual scrolling
 
   //when a conversation is pulled from the database this will mark them as the current user's message or not
   const manageConversations = (chats)=>{
@@ -38,9 +39,30 @@ const Conversation = (props) => {
   // Scroll to the bottom of the conversation box whenever new messages are added
   useEffect(() => {
     if (convoRef.current) {
-      convoRef.current.scrollTop = convoRef.current.scrollHeight;
+      // Check if the user has scrolled up
+      if (!userScrolledUp.current) {
+        convoRef.current.scrollTop = convoRef.current.scrollHeight;
+      }
     }
+
   }, [convo]);
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      // Check if the user has manually scrolled up
+      if (convoRef.current.scrollTop < convoRef.current.scrollHeight - convoRef.current.clientHeight) {
+        userScrolledUp.current = true;
+      } else {
+        userScrolledUp.current = false;
+      }
+    };
+
+    convoRef.current.addEventListener('scroll', scrollHandler);
+
+    // return () => {
+    //   convoRef.current.removeEventListener('scroll', scrollHandler);
+    // };
+  }, []);
 
   return (
     <React.Fragment>

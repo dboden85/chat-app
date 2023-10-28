@@ -36,7 +36,7 @@ const LoginForm = (props)=>{
             .then(
                 data => {
                 if(data.status){
-                    console.log(data)
+                    console.log(data.message);
                     loginCtx.login(data);
                 }else{
                     alert(data.message);
