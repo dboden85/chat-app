@@ -4,8 +4,8 @@
     width: calc(100% - 20px);
     max-width: 500px;
     height: auto;
-    background-color: aqua;
-    border: 2px solid #000;
+    background-color: #00000090;
+    /* border: 2px solid #196896; */
     border-radius: 10px;
     padding: 30px;
     margin: auto;
@@ -19,11 +19,13 @@
 h2{
     text-align: center;
     font-size: 50px;
+    color: #fff;
 }
 
 p{
     margin-top: 30px;
     text-align: center;
+    color: #fff;
 }
 
 .link{
@@ -43,21 +45,28 @@ p{
 .loginform label{
     font-size: 24px;
     margin: 10px 0 5px 0;
+    color: #fff;
 }
 
 .loginform input{
     width: 100%;
     height: 30px;
     font-size: 20px;
+    border-radius: 5px;
+    border: 0;
 }
 
 .loginform input.submit{
+    height: auto;
     margin-top: 20px;
+    padding: 15px;
     color: #fff;
-    background-color: #000;
+    background-color: #196896;
+    font-size: 24px;
 }
 
 .loginform input.submit:hover{
     background-color: #fff;
     color: #000;
+    cursor: pointer;
 }
