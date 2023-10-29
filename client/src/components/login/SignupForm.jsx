@@ -27,10 +27,10 @@ const SignupForm = (props) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          username: newuser,
           fname,
           lname,
-          username: newuser,
-          pass: newpass,
+          pass: newpass
         }),
       });
 

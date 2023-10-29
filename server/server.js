@@ -56,7 +56,7 @@ app.post('/api/login', (req, res) => {
           return handleDatabaseError(compareErr, res);
         }
         if (isMatch) {
-          res.status(200).json({ message: 'Login successful', name: results[0].name, id: results[0].id, status: 1 });
+          res.status(200).json({ message: 'Login successful', name: results[0].firstname, id: results[0].id, status: 1 });
         } else {
           res.status(401).json({ message: 'Login failed', status: 0 });
         }
@@ -69,9 +69,9 @@ app.post('/api/login', (req, res) => {
 
 // User signup
 app.post('/api/signup', (req, res) => {
-  const { fname, lname, username, pass } = req.body;
+  const { username, fname, lname, pass } = req.body;
   const query = 'SELECT * FROM users WHERE username = ?;';
-  const addUserQuery = 'INSERT INTO users (name, lastname, username, password) VALUES(?, ?, ?, ?);';
+  const addUserQuery = 'INSERT INTO users (username, firstname, lastname, password) VALUES(?, ?, ?, ?);';
 
   bcrypt.hash(pass, saltRounds, (hashErr, hash) => {
     if (hashErr) {
@@ -86,7 +86,7 @@ app.post('/api/signup', (req, res) => {
       if (results.length > 0) {
         res.status(200).json({ message: 'That username is already in use', status: 0 });
       } else {
-        db.query(addUserQuery, [fname, lname, username, hash], (addError, aResults) => {
+        db.query(addUserQuery, [username, fname, lname, hash], (addError, aResults) => {
           if (addError) {
             return handleDatabaseError(addError, res);
           }
