@@ -52,7 +52,7 @@ const SignupForm = (props)=>{
     }
 
 
-    const onClickHandler = (e)=>{
+    const onClickHandler = ()=>{
         props.setSignup(false)
     }
 

@@ -6,7 +6,7 @@ const LoginContext = React.createContext({
         name: ''
     },
     isLoggedIn: false,
-    login: (data) => {},
+    login: () => {},
     logout: ()=>{}
 });
 

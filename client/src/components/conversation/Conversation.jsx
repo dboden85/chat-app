@@ -3,6 +3,7 @@ import classes from './Conversation.module.css';
 import ChatBox from './ChatBox';
 import LoginContext from '../login/login-context';
 
+
 const Conversation = (props) => {
   const [convo, setConvo] = useState([])
   const convoRef = useRef(null);
@@ -45,7 +46,8 @@ const Conversation = (props) => {
       }
     }
 
-    setInterval(getChat, 1000);
+    // setInterval(getChat, 1000);
+    getChat();
 
   }, [convo]);
 

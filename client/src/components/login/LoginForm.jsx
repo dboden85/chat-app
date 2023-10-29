@@ -50,7 +50,7 @@ const LoginForm = (props)=>{
             )
     }
 
-    const onClickHandler = (e)=>{
+    const onClickHandler = ()=>{
         props.setSignup(true)
     }
 
