@@ -10,11 +10,15 @@ const Header = () => {
       <div className={classes['title-container']}>
         <h1>MD CHAT</h1>
       </div>
-      {loginCtx.isLoggedIn && <div className={classes['signout-container']}>
-        <button onClick={loginCtx.logout} className={classes.btn}>Sign Out</button>
-      </div> }
+      {loginCtx.isLoggedIn && (
+        <div className={classes['signout-container']}>
+          <button onClick={loginCtx.logout} className={classes.btn}>
+            Sign Out
+          </button>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 export default Header;

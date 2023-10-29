@@ -1,76 +1,68 @@
-import React, {useReducer} from 'react';
+import React, { useReducer, useEffect } from 'react';
 import LoginContext from './login-context';
 
-let userObject = sessionStorage.getItem('currentUser') && JSON.parse(sessionStorage.getItem('currentUser'));
-
 const defaultLoginState = {
-    currentUser: {
-        id: userObject && userObject.id,
-        name: userObject && userObject.name
-    },
-    isLoggedIn: sessionStorage.getItem('isLoggedIn') === 'true' ? true : false,
-}
+  currentUser: {
+    id: '',
+    name: '',
+  },
+  isLoggedIn: false,
+};
 
-const loginReducer = (state, action) =>{
-    if(action.type === 'LOGIN'){
-        sessionStorage.setItem('isLoggedIn', true);
-        sessionStorage.setItem('currentUser', JSON.stringify({id: action.data.id, name: action.data.name}))
-        return{
-        currentUser: {
-            id: action.data.id,
-            name: action.data.name
-        },
-        isLoggedIn: true
-        };
+const loginReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      sessionStorage.setItem('isLoggedIn', true);
+      sessionStorage.setItem('currentUser', JSON.stringify(action.data));
+      return {
+        currentUser: { ...action.data },
+        isLoggedIn: true,
+      };
+    case 'LOGOUT':
+      sessionStorage.setItem('isLoggedIn', false);
+      sessionStorage.removeItem('currentUser');
+      return defaultLoginState;
+    default:
+      return state;
+  }
+};
+
+const LoginProvider = (props) => {
+  const [loginState, dispatchLoginAction] = useReducer(
+    loginReducer,
+    defaultLoginState
+  );
+
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem('currentUser');
+    if (storedUser) {
+      const userObject = JSON.parse(storedUser);
+      dispatchLoginAction({ type: 'LOGIN', data: userObject });
     }
+  }, []);
 
-    if(action.type === 'LOGOUT'){
-        sessionStorage.setItem('isLoggedIn', false);
-        sessionStorage.setItem('currentUser', '')
-        userObject = {};
-        return {
-        currentUser: {
-            id: '',
-            name: ''
-        },
-        isLoggedIn: false
-        };
+  const loginHandler = (data) => {
+    if (data.status) {
+      dispatchLoginAction({ type: 'LOGIN', data });
     }
+  };
 
-    return defaultLoginState;
-}
+  const logoutHandler = () => {
+    dispatchLoginAction({ type: 'LOGOUT' });
+  };
 
-const LoginProvider = props => {
+  const loginContext = {
+    currentUser: loginState.currentUser,
+    isLoggedIn: loginState.isLoggedIn,
+    login: loginHandler,
+    logout: logoutHandler,
+  };
 
-    const [loginState, dispatchLoginAction] = useReducer(loginReducer, defaultLoginState);
+  return (
+    <LoginContext.Provider value={loginContext}>
+      {props.children}
+    </LoginContext.Provider>
+  );
+};
 
-    const loginHandler = (data)=>{
-        if(data.status){
-          dispatchLoginAction({type: 'LOGIN', data: data});
-        }
-      }
-    
-      //manages events on logout.
-      const logoutHandler = ()=>{
-        dispatchLoginAction({type: 'LOGOUT'});
-      }
-
-    const loginContext = {
-        currentUser: {
-            id: loginState.currentUser.id,
-            name: loginState.currentUser.name
-        },
-        isLoggedIn: loginState.isLoggedIn,
-        login: loginHandler,
-        logout: logoutHandler
-    }
-
-
-    return (
-        <LoginContext.Provider value={loginContext}>
-            {props.children}
-        </LoginContext.Provider>
-    )
-}
-
-export default LoginProvider
+export default LoginProvider;
