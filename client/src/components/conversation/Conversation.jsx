@@ -45,7 +45,7 @@ const Conversation = (props) => {
       }
     }
 
-    getChat();
+    setInterval(getChat, 1000);
 
   }, [convo]);
 

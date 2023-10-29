@@ -56,7 +56,7 @@ const LoginForm = (props)=>{
 
     return(
         <>
-        <h2>Chat Login</h2>
+        <h2>Login</h2>
         <form className={classes.loginform} action="/" onSubmit={onLoginHandler}>
             <label htmlFor="uname">Username</label>
             <input ref={userName} type="text" id="uname" />
