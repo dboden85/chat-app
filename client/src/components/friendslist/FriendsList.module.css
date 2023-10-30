@@ -2,8 +2,9 @@
     width: 100%;
     max-width: 400px;
     height: 100%;
-    background-color: #196896;
+    /* background-color: #196896; */
     /* border-right: 10px solid #000; */
+    background-color: #333;
 }
 
 .friendslist .friendshead{
@@ -40,7 +41,7 @@
 }
 
 .friend.online{
-    background-image: linear-gradient(to right, #333 90%, #cc5500)
+    background-image: linear-gradient(to left, #333 99%, #00ff00);
 }
 
 .friend.online:hover{

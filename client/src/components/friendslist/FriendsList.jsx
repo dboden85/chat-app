@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from './FriendsList.module.css';
 
 const FriendsList = (props)=>{
@@ -29,6 +29,15 @@ const FriendsList = (props)=>{
         }
     ])
 
+    useEffect(()=>{
+        fetch('http://chat.david-boden.com:5000/api/users')
+        .then( response => response.json())
+        .then(
+            data => setFriends(data)
+            )
+        .catch(err => console.log(`${err}\nLet Dave or Mark know`));
+    },[]);
+
     const onClass = classes.friend + ' ' + classes.online;
     const offClass = classes.friend;
 
@@ -41,7 +50,7 @@ const FriendsList = (props)=>{
                 <ul>
                 {
                     friends.map(friend =>(
-                        <li key={friend.id} className={friend.online ? onClass : offClass}>{friend.name}</li>
+                        <li key={friend.id} className={friend.isonline ? onClass : offClass}>{friend.firstname + ' ' + friend.lastname}</li>
                     ))
                 }
                 </ul>
