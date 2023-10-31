@@ -8,7 +8,7 @@ const Header = () => {
   const onSignoutHandler = ()=>{
     fetch('http://chat.david-boden.com:5000/api/signout')
     .then(response => response.json())
-    .then(data  => {
+    .then(data => {
       if(data.status){
         console.log(data.message);
         loginCtx.logout

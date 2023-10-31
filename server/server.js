@@ -108,7 +108,12 @@ app.post('/api/signout', (req, res) => {
   const query  = 'UPDATE users SET isonline = 0 WHERE id = ?;';
 
   db.query(query, id, (error, results)=>{
-    handleDatabaseResponse(error, results, res);
+    if(error){
+      return handleDatabaseError(error, res)
+    }
+
+    res.status(200).json({ message: 'Signout Successful', status: 1});
+
   })
 })
 
