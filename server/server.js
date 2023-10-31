@@ -44,6 +44,7 @@ app.get('/api/users', (req, res) => {
 app.post('/api/login', (req, res) => {
   const { username, pass } = req.body;
   const query = 'SELECT * FROM users WHERE username = ?;';
+  const setStatus = 'UPDATE users SET isonline = 1 WHERE id = ?;';
 
   db.query(query, [username], (error, results) => {
     if (error) {
@@ -56,7 +57,17 @@ app.post('/api/login', (req, res) => {
           return handleDatabaseError(compareErr, res);
         }
         if (isMatch) {
-          res.status(200).json({ message: 'Login successful', name: results[0].firstname, id: results[0].id, status: 1 });
+          db.query(setStatus, results[0].id, (aError, aResults) => {
+            if(aError){
+              return handleDatabaseError(aError);
+            }
+
+            if(aResults){
+              res.status(200).json({ message: 'Login successful', name: results[0].firstname, id: results[0].id, status: 1 });
+            }
+            
+          })
+          
         } else {
           res.status(401).json({ message: 'Login failed', status: 0 });
         }
@@ -104,6 +115,7 @@ app.post('/api/signup', (req, res) => {
 
 //User Signout
 app.post('/api/signout', (req, res) => {
+  console.log('signout ran');
   const {id} = req.body;
   const query  = 'UPDATE users SET isonline = 0 WHERE id = ?;';
 
@@ -112,7 +124,12 @@ app.post('/api/signout', (req, res) => {
       return handleDatabaseError(error, res)
     }
 
-    res.status(200).json({ message: 'Signout Successful', status: 1});
+    if(results){
+      res.status(200).json({ message: 'Signout Successful', status: 1});
+    }else{
+      res.status(200).json({message: 'Help', status: 0});
+    }
+    
 
   })
 })
