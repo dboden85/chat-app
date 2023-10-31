@@ -6,12 +6,18 @@ const Header = () => {
   const loginCtx = useContext(LoginContext);
 
   const onSignoutHandler = ()=>{
-    fetch('http://chat.david-boden.com:5000/api/signout')
+    fetch('http://chat.david-boden.com:5000/api/signout',{
+      method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: loginCtx.currentUser.id }),
+      })
     .then(response => response.json())
     .then(data => {
       if(data.status){
         console.log(data.message);
-        loginCtx.logout
+        loginCtx.logout();
       }else{
         console.log(data.message);
       }
