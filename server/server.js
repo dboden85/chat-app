@@ -102,6 +102,16 @@ app.post('/api/signup', (req, res) => {
   });
 });
 
+//User Signout
+app.post('/api/signout', (req, res) => {
+  const {id} = req.body;
+  const query  = 'UPDATE users SET isonline = 0 WHERE id = ?;';
+
+  db.query(query, id, (error, results)=>{
+    handleDatabaseResponse(error, results, res);
+  })
+})
+
 // Get all chats
 app.get('/api/chats', (req, res) => {
   const query = 'SELECT * FROM chats';
