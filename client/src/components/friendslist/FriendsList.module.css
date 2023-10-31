@@ -27,7 +27,7 @@
     height: auto;
     margin-bottom: 10px;
     padding: 15px;
-    background-color: #333;
+    background-color: #000;
     list-style-type: none;
     color: #fff;
     font-size: 20px;
@@ -41,7 +41,7 @@
 }
 
 .friend.online{
-    background-image: linear-gradient(to left, #333 99%, #00ff00);
+    background-image: linear-gradient(to left, #000 99%, #00ff00);
 }
 
 .friend.online:hover{
