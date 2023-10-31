@@ -5,6 +5,19 @@ import LoginContext from './login/login-context';
 const Header = () => {
   const loginCtx = useContext(LoginContext);
 
+  const onSignoutHandler = ()=>{
+    fetch('http://chat.david-boden.com:5000/api/signout')
+    .then(response => response.json())
+    .then(data  => {
+      if(data.status){
+        console.log(data.message);
+        loginCtx.logout
+      }else{
+        console.log(data.message);
+      }
+    })
+  }
+
   return (
     <div className={classes.header}>
       <div className={classes['title-container']}>
@@ -12,7 +25,7 @@ const Header = () => {
       </div>
       {loginCtx.isLoggedIn && (
         <div className={classes['signout-container']}>
-          <button onClick={loginCtx.logout} className={classes.btn}>
+          <button onClick={onSignoutHandler} className={classes.btn}>
             Sign Out
           </button>
         </div>
