@@ -38,6 +38,8 @@
 .friend:hover{
     background-color: #cc5500;
     cursor: pointer;
+    margin-left: 5px;
+    transition: margin .25s ease-in-out;
 }
 
 .friend.online{
