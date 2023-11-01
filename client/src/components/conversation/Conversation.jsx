@@ -52,7 +52,7 @@ const Conversation = (props) => {
   }, [convo]);
 
   return (
-    <React.Fragment>
+    <div className={classes.convocontainer}>
       <div className={classes['convo-box']}>
         <div className={classes.convos} ref={convoRef}>
           {convo.length > 0 && (
@@ -68,7 +68,7 @@ const Conversation = (props) => {
         </div>
       </div>
       <ChatBox url={props.url} />
-    </React.Fragment>
+    </div>
   );
 }
 

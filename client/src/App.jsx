@@ -1,6 +1,7 @@
 import React,{ useContext } from 'react'
 import './App.css'
 import Header from './components/Header'
+import FriendsList from './components/friendslist/FriendsList'
 import Conversation from './components/conversation/Conversation'
 import Login from './components/login/Login'
 import LoginContext from './components/login/login-context'
@@ -26,7 +27,10 @@ function App() {
           :
         <div className='app-container'>
           <Header/>
-          <Conversation url={url}/>
+          <div className='fc-container'>
+            <FriendsList />
+            <Conversation url={url}/>
+          </div>
         </div>
         }
         

@@ -24,6 +24,11 @@
   width: 100%;
   /* max-width: 800px; */
   height: 100%;
-  background-color: aqua;
+  background-color: #cc5500;
   overflow: hidden;
+}
+
+.app-container .fc-container{
+  display: flex;
+  height: 100%;
 }

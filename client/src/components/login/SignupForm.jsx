@@ -1,11 +1,45 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import classes from './Login.module.css';
+import LoginContext from './login-context';
 
 const SignupForm = (props) => {
   const fnameRef = useRef();
   const lnameRef = useRef();
   const newuserRef = useRef();
   const newpassRef = useRef();
+  const loginCtx = useContext(LoginContext);
+
+  const onLoginHandler = async () => {
+    const newuser = newuserRef.current.value;
+    const newpass = newpassRef.current.value;
+
+    if (!newuser || !newpass) {
+      alert('Missing Info');
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://${props.url}:5000/api/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pass: newpass, username: newuser }),
+      });
+
+      const data = await response.json();
+
+      if (data.status) {
+        console.log(data.message);
+        loginCtx.login(data);
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error(error.message);
+      alert('An error occurred. Please contact Dave or Mark.');
+    }
+  };
 
   const onSignupHandler = async (e) => {
     e.preventDefault();
@@ -37,17 +71,14 @@ const SignupForm = (props) => {
       const data = await response.json();
 
       if (data.status) {
-        console.log(data);
+        console.log(data.message);
+        onLoginHandler();
       } else {
         alert(data.message);
       }
     } catch (error) {
       console.error(`${error}\nLet Dave or Mark know`);
     }
-  };
-
-  const onClickHandler = () => {
-    props.setSignup(false);
   };
 
   return (

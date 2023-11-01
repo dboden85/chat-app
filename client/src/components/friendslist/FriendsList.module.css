@@ -1,0 +1,52 @@
+.friendslist{
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    /* background-color: #196896; */
+    /* border-right: 10px solid #000; */
+    background-color: #333;
+}
+
+.friendslist .friendshead{
+    background-color: #cc5500;
+    padding: 10px;
+}
+
+.friendshead h2{
+    font-size: 26px;
+}
+
+.friendslist .friends{
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.friends .friend{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #000;
+    list-style-type: none;
+    color: #fff;
+    font-size: 20px;
+    /* border: 2px solid #cc5500; */
+    border-radius: 10px;
+}
+
+.friend:hover{
+    background-color: #cc5500;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: margin .25s ease-in-out;
+}
+
+.friend.online{
+    background-image: linear-gradient(to left, #000 99%, #00ff00);
+}
+
+.friend.online:hover{
+    background-image: unset;
+    background-color: #cc5500;
+}
