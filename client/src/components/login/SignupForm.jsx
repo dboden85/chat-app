@@ -81,6 +81,10 @@ const SignupForm = (props) => {
     }
   };
 
+  const onClickHandler = () => {
+    props.setSignup(false);
+  };
+
   return (
     <>
       <h2>Signup</h2>
