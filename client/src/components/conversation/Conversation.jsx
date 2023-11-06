@@ -3,11 +3,14 @@ import classes from './Conversation.module.css';
 import ChatBox from './ChatBox';
 import LoginContext from '../login/login-context';
 
+
 const Conversation = (props) => {
   const [convo, setConvo] = useState([]);
   const convoRef = useRef(null);
   const userScrolledUp = useRef(false);
   const loginCtx = useContext(LoginContext);
+  
+  
 
   const manageConversations = (chats) => {
     if (loginCtx.currentUser) {

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
 const app = express();
 const PORT = 5000;
 
