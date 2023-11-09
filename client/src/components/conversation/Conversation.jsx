@@ -2,15 +2,26 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import classes from './Conversation.module.css';
 import ChatBox from './ChatBox';
 import LoginContext from '../login/login-context';
+import io from 'socket.io-client';
+
+const socket = io.connect('http://chat.david-boden.com:5000');
 
 
 const Conversation = (props) => {
   const [convo, setConvo] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
   const convoRef = useRef(null);
   const userScrolledUp = useRef(false);
   const loginCtx = useContext(LoginContext);
-  
-  
+
+  useEffect(() => {
+    if(newMessage.trim()){
+      setConvo(prev => [...prev, newMessage])
+      socket.emit('send_message', newMessage);
+    }
+  }, [newMessage])
+
+
 
   const manageConversations = (chats) => {
     if (loginCtx.currentUser) {
@@ -27,6 +38,10 @@ const Conversation = (props) => {
       .then(data => manageConversations(data))
       .catch(err => console.log(`${err}\nLet Dave or Mark know`));
   }
+
+  useEffect(() => {
+    getChat();
+  }, []);
 
   const handleScroll = () => {
     if (convoRef.current && convoRef.current.scrollTop < convoRef.current.scrollHeight - convoRef.current.clientHeight) {
@@ -50,8 +65,6 @@ const Conversation = (props) => {
     if (convoRef.current && !userScrolledUp.current) {
       convoRef.current.scrollTop = convoRef.current.scrollHeight;
     }
-
-    getChat();
   }, [convo]);
 
   return (
@@ -70,7 +83,7 @@ const Conversation = (props) => {
           )}
         </div>
       </div>
-      <ChatBox url={props.url} />
+      <ChatBox url={props.url} setNewMessage={setNewMessage} />
     </div>
   );
 }

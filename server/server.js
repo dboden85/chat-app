@@ -29,6 +29,38 @@ db.connect((err) => {
   }
 });
 
+const http = require("http");
+const { Server } = require("socket.io");
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://chat.david-boden.com",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("send_message", (data) => {
+    console.log(data);
+
+    const { mess, uid, uname } = data;
+
+    const query = 'INSERT INTO chats (name, userid, message) VALUES(?, ?, ?);';
+
+    db.query(query, [uname, uid, mess], (error, results) => {
+      if (error) {
+        console.log("something went wrong while adding a new message to the chats database");
+      }
+    });
+  });
+
+});
+
+
+
 // Routes
 
 // Get all users
@@ -41,6 +73,7 @@ app.get('/api/users', (req, res) => {
 
 // User login
 app.post('/api/login', (req, res) => {
+  console.log('Login Ran');
   const { username, pass } = req.body;
   const query = 'SELECT * FROM users WHERE username = ?;';
   const setStatus = 'UPDATE users SET isonline = 1 WHERE id = ?;';
@@ -57,16 +90,16 @@ app.post('/api/login', (req, res) => {
         }
         if (isMatch) {
           db.query(setStatus, results[0].id, (aError, aResults) => {
-            if(aError){
+            if (aError) {
               return handleDatabaseError(aError);
             }
 
-            if(aResults){
+            if (aResults) {
               res.status(200).json({ message: 'Login successful', name: results[0].firstname, id: results[0].id, status: 1 });
             }
-            
+
           })
-          
+
         } else {
           res.status(401).json({ message: 'Login failed', status: 0 });
         }
@@ -115,20 +148,20 @@ app.post('/api/signup', (req, res) => {
 //User Signout
 app.post('/api/signout', (req, res) => {
   console.log('signout ran');
-  const {id} = req.body;
-  const query  = 'UPDATE users SET isonline = 0 WHERE id = ?;';
+  const { id } = req.body;
+  const query = 'UPDATE users SET isonline = 0 WHERE id = ?;';
 
-  db.query(query, id, (error, results)=>{
-    if(error){
+  db.query(query, id, (error, results) => {
+    if (error) {
       return handleDatabaseError(error, res)
     }
 
-    if(results){
-      res.status(200).json({ message: 'Signout Successful', status: 1});
-    }else{
-      res.status(200).json({message: 'Help', status: 0});
+    if (results) {
+      res.status(200).json({ message: 'Signout Successful', status: 1 });
+    } else {
+      res.status(200).json({ message: 'Help', status: 0 });
     }
-    
+
 
   })
 })
@@ -142,16 +175,17 @@ app.get('/api/chats', (req, res) => {
 });
 
 // Create a new chat message
-app.post('/api/chats', (req, res) => {
-  const { mess, uid, uname } = req.body;
-  const query = 'INSERT INTO chats (name, userid, message) VALUES(?, ?, ?);';
+// app.post('/api/chats', (req, res) => {
+//   const { mess, uid, uname } = req.body;
+//   const query = 'INSERT INTO chats (name, userid, message) VALUES(?, ?, ?);';
 
-  db.query(query, [uname, uid, mess], (error, results) => {
-    handleDatabaseResponse(error, results, res);
-  });
-});
+//   db.query(query, [uname, uid, mess], (error, results) => {
+//     handleDatabaseResponse(error, results, res);
+//   });
+// });
 
 // Helper functions
+
 function handleDatabaseError(error, res) {
   console.error('Error executing query: ' + error);
   res.status(500).send('Error during database operation');
@@ -166,6 +200,8 @@ function handleDatabaseResponse(error, results, res) {
 }
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+
+const lUser = process.env.USER;
+server.listen(PORT, () => {
+  console.log(`Hello ${lUser}! Server is running on port ${PORT}`);
 });

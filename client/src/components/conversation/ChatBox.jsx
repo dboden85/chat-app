@@ -10,26 +10,28 @@ const ChatBox = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    const message = messRef.current.value;
-    const userId = loginCtx.currentUser.id;
-    const userName = loginCtx.currentUser.name;
+    const mess = messRef.current.value;
+    const uid = loginCtx.currentUser.id;
+    const uname = loginCtx.currentUser.name;
 
-    if (message) {
-      fetch(`http://${props.url}:5000/api/chats`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ mess: message, uid: userId, uname: userName }),
-      })
-        .then((response) => response.json())
-        .then(() => {
-          messRef.current.value = ''; // Clear the text area
-        })
-        .catch((error) => {
-          console.error('Error sending message:', error);
-        });
-    }
+    // if (message) {
+    //   fetch(`http://${props.url}:5000/api/chats`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ mess: message, uid: userId, uname: userName }),
+    //   })
+    //     .then((response) => response.json())
+    //     .then(() => {
+    //       messRef.current.value = ''; // Clear the text area
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error sending message:', error);
+    //     });
+    // }
+
+    props.setNewMessage({ mess, uid, uname });
   };
 
   const handleKeyPress = (e) => {
