@@ -28,7 +28,7 @@ function App() {
         <div className='app-container'>
           <Header/>
           <div className='fc-container'>
-           {/* <FriendsList />*/}
+           <FriendsList />
             <Conversation url={url}/>
           </div>
         </div>

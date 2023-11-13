@@ -9,7 +9,7 @@ lerna-debug.log*
 
 node_modules
 vite.config.js
-dist
+#dist
 dist-ssr
 *.local
 
