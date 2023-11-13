@@ -4,44 +4,62 @@ import ChatBox from './ChatBox';
 import LoginContext from '../login/login-context';
 import io from 'socket.io-client';
 
-const socket = io.connect('http://chat.david-boden.com:5000');
 
 
 const Conversation = (props) => {
   const [convo, setConvo] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState([]);
   const convoRef = useRef(null);
   const userScrolledUp = useRef(false);
   const loginCtx = useContext(LoginContext);
 
+  const socket = io.connect('http://chat.david-boden.com:5000');
+
+  //use socket.io to send messages out.
   useEffect(() => {
-    if(newMessage.trim()){
-      setConvo(prev => [...prev, newMessage])
-      socket.emit('send_message', newMessage);
-    }
-  }, [newMessage])
+    const sendMessageAndFetchChat = () => {
+      if (newMessage.message && loginCtx.currentUser) {
+        // Emit the message to the server
+        socket.emit('send_message', newMessage);
+        setConvo(prev => [...prev, newMessage]);
+      }
+    };
+  
+    sendMessageAndFetchChat();
 
+  }, [newMessage]);
+  
+  //use socket.io to recieve messages.
+  useEffect(() => {
+    const handleReceivedMessage = (data) => {
+      if (data.message && loginCtx.currentUser && data.userid !== loginCtx.currentUser.id) {
+        data.isUser = data.userid === loginCtx.currentUser.id;
+        setConvo((prev) => [...prev, data]);
+      }
+    };
+  
+    socket.on('receive_message', handleReceivedMessage);
+  
+    return () => {
+      socket.off('receive_message', handleReceivedMessage);
+    };
+  }, [socket]);
 
-
-  const manageConversations = (chats) => {
-    if (loginCtx.currentUser) {
-      chats.forEach(chat => {
+  const getChat = async () => {
+    console.log('getChat ran')
+    try {
+      const response = await fetch(`http://${props.url}:5000/api/chats`);
+      const data = await response.json();
+      if (loginCtx.currentUser) {
+        data.forEach(chat => {
         chat.isUser = chat.userid === loginCtx.currentUser.id;
       });
-      setConvo(chats);
+      setConvo(data);
     }
-  }
-
-  const getChat = () => {
-    fetch(`http://${props.url}:5000/api/chats`)
-      .then(response => response.json())
-      .then(data => manageConversations(data))
-      .catch(err => console.log(`${err}\nLet Dave or Mark know`));
-  }
-
-  useEffect(() => {
-    getChat();
-  }, []);
+    } catch (err) {
+      console.log(`${err}\nLet Dave or Mark know`);
+    }
+  };
 
   const handleScroll = () => {
     if (convoRef.current && convoRef.current.scrollTop < convoRef.current.scrollHeight - convoRef.current.clientHeight) {
@@ -52,6 +70,7 @@ const Conversation = (props) => {
   };
 
   useEffect(() => {
+    getChat();
     convoRef.current.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -71,7 +90,7 @@ const Conversation = (props) => {
     <div className={classes.convocontainer}>
       <div className={classes['convo-box']}>
         <div className={classes.convos} ref={convoRef}>
-          {convo.length > 0 && (
+          {convo.length > 0 ? (
             <ul>
               {convo.map(chat => (
                 <li key={chat.id} className={chat.isUser ? classes.right : classes.left}>
@@ -80,7 +99,7 @@ const Conversation = (props) => {
                 </li>
               ))}
             </ul>
-          )}
+          ) : <p className={classes.nomessages}>No Messages</p>}
         </div>
       </div>
       <ChatBox url={props.url} setNewMessage={setNewMessage} />

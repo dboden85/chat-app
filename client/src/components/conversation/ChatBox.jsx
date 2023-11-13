@@ -10,9 +10,10 @@ const ChatBox = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    const mess = messRef.current.value;
-    const uid = loginCtx.currentUser.id;
-    const uname = loginCtx.currentUser.name;
+    const message = messRef.current.value;
+    const userid = loginCtx.currentUser.id;
+    const name = loginCtx.currentUser.name;
+    const isUser = true;
 
     // if (message) {
     //   fetch(`http://${props.url}:5000/api/chats`, {
@@ -31,7 +32,10 @@ const ChatBox = (props) => {
     //     });
     // }
 
-    props.setNewMessage({ mess, uid, uname });
+    if(message){
+      props.setNewMessage({ message, userid, name, isUser });
+    }
+    messRef.current.value = '';
   };
 
   const handleKeyPress = (e) => {
