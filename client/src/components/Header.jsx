@@ -6,7 +6,7 @@ const Header = () => {
   const loginCtx = useContext(LoginContext);
 
   const onSignoutHandler = ()=>{
-    fetch('http://chat.david-boden.com:5000/api/signout', {
+    fetch('https://chat.david-boden.com:5000/api/signout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

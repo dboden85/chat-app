@@ -4,8 +4,8 @@
     height: 100px;
     padding: 10px 5px;
     background-color: #196896;
-    position: fixed;
-    bottom: 0;
+    /* position: fixed; */
+    /* bottom: 0; */
 }
 
 .chat-box form{
