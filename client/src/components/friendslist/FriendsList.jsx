@@ -5,7 +5,7 @@ const FriendsList = (props)=>{
     const [friends, setFriends] = useState([])
 
     useEffect(()=>{
-        fetch('https://chat.david-boden.com:5000/api/users')
+        fetch('http://chat.david-boden.com:5000/api/users')
         .then( response => response.json())
         .then(
             data => setFriends(data)

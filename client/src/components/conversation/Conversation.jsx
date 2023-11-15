@@ -48,7 +48,7 @@ const Conversation = (props) => {
   const getChat = async () => {
     console.log('getChat ran')
     try {
-      const response = await fetch(`https://${props.url}:5000/api/chats`);
+      const response = await fetch(`http://${props.url}:5000/api/chats`);
       const data = await response.json();
       if (loginCtx.currentUser) {
         data.forEach(chat => {

@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://192.168.0.121:5173",
+    origin: "http://chat.david-boden.com",
     methods: ["GET", "POST"],
   },
 });
@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (data) => {
     console.log(data);
-    
+
     socket.broadcast.emit('receive_message', data);
 
     const { message, userid, name } = data;

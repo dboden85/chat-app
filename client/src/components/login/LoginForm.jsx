@@ -21,7 +21,7 @@ const LoginForm = (props) => {
     }
 
     try {
-      const response = await fetch(`https://${props.url}:5000/api/login`, {
+      const response = await fetch(`http://${props.url}:5000/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const LoginForm = (props) => {
       <h2>Login</h2>
       <form className={classes.loginform} onSubmit={onLoginHandler}>
         <label htmlFor="uname">Username</label>
-        <input ref={userNameRef} type="text" id="uname" />
+        <input ref={userNameRef} type="text" id="uname" placeholder="David" />
         <label htmlFor="pass">Password</label>
         <input ref={userPassRef} type="password" id="pass" />
         <button type="submit" className={classes.submit}>
