@@ -10,7 +10,6 @@ const Conversation = (props) => {
   const [convo, setConvo] = useState([]);
   const [newMessage, setNewMessage] = useState([]);
   const convoRef = useRef(null);
-  const userScrolledUp = useRef(false);
   const loginCtx = useContext(LoginContext);
 
   const socket = io.connect('http://chat.david-boden.com:5000');
@@ -65,26 +64,8 @@ const Conversation = (props) => {
     getChat();
   }, [])
 
-  const handleScroll = () => {
-    if (convoRef.current && convoRef.current.scrollTop < convoRef.current.scrollHeight - convoRef.current.clientHeight) {
-      userScrolledUp.current = true;
-    } else {
-      userScrolledUp.current = false;
-    }
-  };
-
   useEffect(() => {
-    convoRef.current.addEventListener('scroll', handleScroll);
-
-    return () => {
-      if (convoRef.current) {
-        convoRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (convoRef.current && !userScrolledUp.current) {
+    if (convoRef.current) {
       console.log('auto scrolling runs')
       convoRef.current.scrollTop = convoRef.current.scrollHeight;
     }
