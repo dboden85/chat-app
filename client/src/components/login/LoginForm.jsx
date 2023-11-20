@@ -37,6 +37,7 @@ const LoginForm = (props) => {
         loginCtx.login(data);
       } else {
         alert(data.message);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error(error.message);
@@ -54,7 +55,7 @@ const LoginForm = (props) => {
       <h2>Login</h2>
       <form className={classes.loginform} onSubmit={onLoginHandler}>
         <label htmlFor="uname">Username</label>
-        <input ref={userNameRef} type="text" id="uname" placeholder="David" />
+        <input ref={userNameRef} type="text" id="uname"/>
         <label htmlFor="pass">Password</label>
         <input ref={userPassRef} type="password" id="pass" />
         <button type="submit" className={classes.submit}>

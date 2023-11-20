@@ -8,7 +8,13 @@
   background-color: #196896;
 }
 
+.header .usergreet p{
+  margin: 0;
+  font-size: 28px;
+}
+
 .header .signout-container{
+  align-items: center;
   width: 100%;
   max-width: max-content;
   height: auto;
@@ -39,14 +45,14 @@
   scale: 99%;
 }
 
-.header .title-container h1{
-  color: #fff;
-}
-
 @media(min-width: 768px){
   .header{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .header .signout-container .btn{
+    margin: 0;
   }
 }

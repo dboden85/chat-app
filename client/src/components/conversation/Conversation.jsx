@@ -61,6 +61,10 @@ const Conversation = (props) => {
     }
   };
 
+  useEffect(()=>{
+    getChat();
+  }, [])
+
   const handleScroll = () => {
     if (convoRef.current && convoRef.current.scrollTop < convoRef.current.scrollHeight - convoRef.current.clientHeight) {
       userScrolledUp.current = true;
@@ -70,7 +74,6 @@ const Conversation = (props) => {
   };
 
   useEffect(() => {
-    getChat();
     convoRef.current.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -82,6 +85,7 @@ const Conversation = (props) => {
 
   useEffect(() => {
     if (convoRef.current && !userScrolledUp.current) {
+      console.log('auto scrolling runs')
       convoRef.current.scrollTop = convoRef.current.scrollHeight;
     }
   }, [convo]);
@@ -95,7 +99,7 @@ const Conversation = (props) => {
               {convo.map(chat => (
                 <li key={chat.id} className={chat.isUser ? classes.right : classes.left}>
                   <p className={classes.message}>{chat.message}</p>
-                  <p className={classes.name}>{'-' + chat.name}</p>
+                  <p className={classes.name}>{chat.name}</p>
                 </li>
               ))}
             </ul>

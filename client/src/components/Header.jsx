@@ -29,16 +29,17 @@ const Header = () => {
 
   return (
     <div className={classes.header}>
-      <div className={classes['title-container']}>
-        <h1>MD CHAT</h1>
-      </div>
-      {loginCtx.isLoggedIn && (
-        <div className={classes['signout-container']}>
-          <button onClick={onSignoutHandler} className={classes.btn}>
-            Sign Out
-          </button>
-        </div>
-      )}
+        <>
+          <div className={classes.usergreet}>
+            <p>Hello {loginCtx.currentUser.name}!</p>
+          </div>
+          
+          <div className={classes['signout-container']}>
+            <button onClick={onSignoutHandler} className={classes.btn}>
+              Sign Out
+            </button>
+          </div>
+        </>
     </div>
   );
 }
