@@ -1,7 +1,7 @@
 .header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   height: auto;
   padding: 20px;
@@ -11,6 +11,27 @@
 .header .usergreet p{
   margin: 0;
   font-size: 28px;
+}
+
+.header .menuIconContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: max-content;
+  padding: 5px;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: padding 1s ease;
+}
+
+.header .menuIconContainer:hover{
+  padding: 15px;
+  background-color: #33333390;
+}
+
+.header .menuIconContainer .menuIcon{
+  fill: #fff;
 }
 
 .header .signout-container{
@@ -47,7 +68,6 @@
 
 @media(min-width: 768px){
   .header{
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }

@@ -66,7 +66,6 @@ const Conversation = (props) => {
 
   useEffect(() => {
     if (convoRef.current) {
-      console.log('auto scrolling runs')
       convoRef.current.scrollTop = convoRef.current.scrollHeight;
     }
   }, [convo]);
