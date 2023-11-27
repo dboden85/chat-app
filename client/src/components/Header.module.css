@@ -4,13 +4,15 @@
   justify-content: space-between;
   align-items: center;
   height: auto;
-  padding: 20px;
+  padding: 20px 0;
   background-color: #196896;
+  position: relative;
 }
 
 .header .usergreet p{
-  margin: 0;
+  margin: 0 20px;
   font-size: 28px;
+
 }
 
 .header .menuIconContainer{
@@ -19,52 +21,17 @@
   align-items: center;
   width: 100%;
   max-width: max-content;
+  margin: 0 20px;
   padding: 5px;
   background-color: transparent;
   border-radius: 50%;
   transition: padding 1s ease;
 }
 
-.header .menuIconContainer:hover{
-  padding: 15px;
-  background-color: #33333390;
-}
-
 .header .menuIconContainer .menuIcon{
   fill: #fff;
 }
 
-.header .signout-container{
-  align-items: center;
-  width: 100%;
-  max-width: max-content;
-  height: auto;
-}
-
-.header .signout-container .btn{
-  width: 200px;
-  height: auto;
-  padding: 10px;
-  margin-top: 8px;
-  background-color: #cc5500;
-  color: #fff;
-  font-size: 20px;
-  border: none;
-  border-radius: 100px;
-  overflow: hidden;
-}
-
-.header .signout-container .btn:hover{
-  background-color: #fff;
-  color: #000;
-  cursor: pointer;
-}
-
-.header .signout-container .btn:active{
-  background-color: #333;
-  color: #fff;
-  scale: 99%;
-}
 
 @media(min-width: 768px){
   .header{

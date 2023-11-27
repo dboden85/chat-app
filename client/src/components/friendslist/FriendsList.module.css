@@ -1,5 +1,4 @@
 .friendslist{
-    display: none;
     width: 100%;
     max-width: 300px;
     height: 100%;
@@ -54,13 +53,4 @@
     cursor: pointer;
     margin-left: 5px;
     transition: margin .25s ease-in-out;
-}
-
-.friend.online{
-    background-image: linear-gradient(to left, #000 99%, #cc5500);
-}
-
-.friend.online:hover{
-    background-image: unset;
-    background-color: #cc5500;
 }
