@@ -15,8 +15,7 @@ const FriendsList = (props)=>{
 
 useEffect(()=>{
 console.log(friends)
-},[friends])
-}
+},[friends]);
     
 return(
     <div className={classes.friendslist}>
@@ -35,5 +34,5 @@ return(
         </div>
     </div>
 )
-
+}
 export default FriendsList;
