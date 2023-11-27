@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from './FriendsList.module.css';
 
 const FriendsList = (props)=>{
-    const [setFriends, friends] = useState([]);
+    const [friends, setFriends] = useState([]);
 
     useEffect(()=>{
         fetch('http://chat.david-boden.com:5000/api/users')
