@@ -17,25 +17,23 @@ useEffect(()=>{
 console.log(friends)
 },[friends])
 }
-    return(
-        <div className={classes.friendslist}>
-            <div className={classes.friendshead}>
-                <div className={classes.froption}>
-                    <h2>Friends</h2>
-                </div>
-               
+    
+return(
+    <div className={classes.friendslist}>
+        <div className={classes.friendshead}>
+            <div className={classes.froption}>
+                <h2>Friends</h2>
             </div>
-            <div className={classes.friends}>
-                <ul>
-                {
-                  friends.map(friend =>(
-                  <li key={friend.id} className={classes.friend}>{friend.firstname + ' ' + friend.lastname}</li>
-                   )
-)
-                }
-                </ul>
-            </div>
+            
         </div>
-    )
-}
+        <div className={classes.friends}>
+            <ul>
+                {
+                    friends.map(friend =>(<li key={friend.id} className={classes.friend}>{friend.firstname + ' ' + friend.lastname}</li>))
+                }
+            </ul>
+        </div>
+    </div>
+)
+
 export default FriendsList;
