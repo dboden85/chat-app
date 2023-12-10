@@ -1,4 +1,4 @@
-.app{
+.app {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -11,7 +11,7 @@
   background-position: top center;
 }
 
-.logo{
+.logo {
   width: 150px;
   margin: 30px auto;
   border-radius: 50%;
@@ -28,7 +28,8 @@
   overflow: hidden;
 }
 
-.app-container .fc-container{
+.app-container .fc-container {
   display: flex;
   height: 100%;
+  position: relative;
 }

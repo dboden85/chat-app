@@ -45,7 +45,7 @@ const Conversation = (props) => {
   }, [socket]);
 
   const getChat = async () => {
-    console.log('getChat ran')
+    // console.log('getChat ran')
     try {
       const response = await fetch(`http://${props.url}:5000/api/chats`);
       const data = await response.json();

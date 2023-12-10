@@ -32,7 +32,7 @@ const LoginForm = (props) => {
       const data = await response.json();
 
       if (data.status) {
-        console.log(data.message);
+        // console.log(data.message);
         setIsLoading(false);
         loginCtx.login(data);
       } else {
