@@ -166,13 +166,13 @@ function signOutUser(req, res) {
 
 function getConversationList(req, res){
   const { uid } = req.body;
-  const query = 'SELECT rooms.id, users.firstname, users.lastname FROM rooms INNER JOIN users ON rooms.person_one = users.id OR rooms.person_two = users.id WHERE (rooms.person_one = 1 OR rooms.person_two = 1) AND users.id != 1;';
+  const query = `SELECT rooms.id, users.firstname, users.lastname FROM rooms INNER JOIN users ON rooms.person_one = users.id OR rooms.person_two = users.id WHERE (rooms.person_one = ${uid} OR rooms.person_two = ${uid}) AND users.id != ${uid};`;
   db.query(query, (error, results) => {
     if(error){
       return handleDatabaseError(error, res);
     }
     // handleDatabaseResponse(error, results, res);
-    res.status(200).json({ message: 'Conversation List Received', id: results[0].id, fname: results[0].firstname, lname: results[0].lastname,  status: 1 });
+    res.status(200).json({ message: 'Conversation List Received', results: results,  status: 1 });
     console.log(results[0]);
     console.log(results[0].firstname);
   })

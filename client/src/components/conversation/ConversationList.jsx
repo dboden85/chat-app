@@ -18,16 +18,22 @@ const ConversationList = (props)=>{
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ uid: loginCtx }),
+            body: JSON.stringify({ uid: loginCtx.currentUser.id }),
           })
         .then((response) => response.json())
         .then((data)=>{
-            console.log(data);
+            if(data.status){
+                setConversation(data.results);
+            }
         })
         .catch(err => {
             console.log(err + '\nLet Mark or Dave know');
         })
     }, []);
+
+    const convoClickHandler = (e)=>{
+        console.log(e.target.dataset.convoid);
+    }
     
 return(
     <div className={classes.conversationlist}>
@@ -38,9 +44,10 @@ return(
         <div className={classes.conversations}>
             {conversations.length > 0 ?
             <ul>
+                <li key='lobby' className={classes.conversation}>Lobby</li>
                 {
                     conversations.map(conversation =>(
-                        <li key={conversation.id} className={classes.conversation}>{conversation.firstname + ' ' + conversation.lastname}</li>
+                        <li data-convoid={conversation.id} key={conversation.id} className={classes.conversation} onClick={convoClickHandler}>{conversation.firstname + ' ' + conversation.lastname}</li>
                     ))
                 }
             </ul>
