@@ -10,17 +10,18 @@ const FriendsList = (props)=>{
         )
     };
 
+
     useEffect(()=>{
         fetch('http://chat.david-boden.com:5000/api/users')
         .then( response => response.json())
         .then(
-            data => setFriends(data)
+            data => {
+                setFriends(data)
+                console.log(data)
+            }
             )
         .catch(err => console.log(`${err}\nLet Dave or Mark know`));
     },[]);
-
-useEffect(()=>{
-},[friends]);
     
 return(
     <div className={classes.friendslist}>
@@ -33,7 +34,7 @@ return(
             <ul>
                 {
                     friends.map(friend =>(
-                        <li key={friend.id} className={classes.friend}>{friend.firstname + ' ' + friend.lastname}</li>
+                        <li data-userid={friend.id} key={friend.id} className={classes.friend}>{friend.firstname + ' ' + friend.lastname}</li>
                     ))
                 }
             </ul>

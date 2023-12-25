@@ -1,11 +1,13 @@
 import React, { useRef, useContext } from 'react';
 import classes from './ChatBox.module.css';
 import LoginContext from '../login/login-context';
+import ConvoContext from './convo-context';
 import plane from '../../assets/images/paper-plane.svg';
 
 const ChatBox = (props) => {
   const messRef = useRef();
   const loginCtx = useContext(LoginContext);
+  const convoCtx = useContext(ConvoContext);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -15,25 +17,8 @@ const ChatBox = (props) => {
     const name = loginCtx.currentUser.name;
     const isUser = true;
 
-    // if (message) {
-    //   fetch(`http://${props.url}:5000/api/chats`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ mess: message, uid: userId, uname: userName }),
-    //   })
-    //     .then((response) => response.json())
-    //     .then(() => {
-    //       messRef.current.value = ''; // Clear the text area
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error sending message:', error);
-    //     });
-    // }
-
     if(message){
-      props.setNewMessage({ message, userid, name, isUser });
+      convoCtx.setNewMess({ message, userid, name, isUser });
     }
     messRef.current.value = '';
   };

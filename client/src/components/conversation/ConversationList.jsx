@@ -42,18 +42,14 @@ return(
             <Close />
         </div>
         <div className={classes.conversations}>
-            {conversations.length > 0 ?
             <ul>
-                <li key='lobby' className={classes.conversation}>Lobby</li>
+                <li data-convoid="1" key='lobby' className={classes.conversation}>Lobby</li>
                 {
                     conversations.map(conversation =>(
                         <li data-convoid={conversation.id} key={conversation.id} className={classes.conversation} onClick={convoClickHandler}>{conversation.firstname + ' ' + conversation.lastname}</li>
                     ))
                 }
             </ul>
-            :
-            <p>You have no friends, loser!</p>
-            }
         </div>
     </div>
 )

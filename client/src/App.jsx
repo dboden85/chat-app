@@ -6,6 +6,7 @@ import ConversationList from './components/conversation/ConversationList';
 import Conversation from './components/conversation/Conversation'
 import Login from './components/login/Login'
 import LoginContext from './components/login/login-context'
+import ConversationProvider from './components/conversation/ConversationProvider';
 
 const url = 'chat.david-boden.com';
 function App() {
@@ -46,11 +47,15 @@ function App() {
         :
         <div className='app-container'>
           <Header openFriends={openFriendsHandler} openConvos={openConversationsHandler}/>
-          <div className='fc-container'>
-            {isFriendListOpen && <FriendsList closeMenu={closeFriendsHandler}/>}
-            {isConversationsOpen && <ConversationList closeConvos={closeConversationsHandler}/>}
-            <Conversation url={url} />
-          </div>
+          
+            <div className='fc-container'>
+              {isFriendListOpen && <FriendsList closeMenu={closeFriendsHandler}/>}
+              {isConversationsOpen && <ConversationList closeConvos={closeConversationsHandler}/>}
+              <ConversationProvider>
+                <Conversation url={url} />
+              </ConversationProvider>
+            </div>
+          
         </div>
       }
 
