@@ -1,44 +1,58 @@
-.convocontainer{
+.convocontainer {
     width: 100%;
     height: 100%;
+}
+
+.roomName {
+    margin: 0;
+    padding: 5px;
+    background-color: black;
+}
+
+.roomName p {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
 }
 
 .convo-box {
     width: 100%;
     height: 100%;
-    background-color: gray; /* Updated solid background color */
+    background-color: gray;
+    /* Updated solid background color */
     max-height: calc(100vh - 180px);
 }
 
 .convo-box .convos {
-width: 100%;
-height: 100%;
-background-color: #fff;
-background-image: url('../../assets/images/fire.svg');
-background-repeat: no-repeat;
-background-position: center center;
-background-size: contain;
-overflow: scroll;
-overflow-anchor: auto;
-scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    background-image: url('../../assets/images/fire.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    overflow: scroll;
+    overflow-anchor: auto;
+    scroll-behavior: smooth;
 }
 
-.right, .left{
+.right,
+.left {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    min-height:fit-content
+    min-height: fit-content
 }
 
-.right{
+.right {
     align-items: flex-end;
 }
 
-.left{
+.left {
     align-items: flex-start;
 }
 
-.right .name{
+.right .name {
     width: max-content;
     text-align: right;
     font-size: 18px;
@@ -47,7 +61,7 @@ scroll-behavior: smooth;
     color: #000;
 }
 
-.left .name{
+.left .name {
     width: max-content;
     text-align: left;
     font-size: 18px;
@@ -56,7 +70,7 @@ scroll-behavior: smooth;
     color: #000;
 }
 
-.message{
+.message {
     width: max-content;
     min-width: 200px;
     max-width: 90%;
@@ -69,15 +83,15 @@ scroll-behavior: smooth;
     position: relative;
 }
 
-.right .message{
+.right .message {
     background-color: green;
     border-radius: 20px 20px 0 20px;
     margin-right: 10px;
 
 }
 
-.right .message::after{
-    content:'';
+.right .message::after {
+    content: '';
     width: 15px;
     height: 15px;
     background-color: green;
@@ -87,14 +101,14 @@ scroll-behavior: smooth;
     bottom: -8px;
 }
 
-.left .message{
+.left .message {
     background-color: blue;
     border-radius: 20px 20px 20px 0;
     margin-left: 10px;
 
 }
 
-.left .message::after{
+.left .message::after {
     content: '';
     width: 15px;
     height: 15px;
@@ -106,8 +120,8 @@ scroll-behavior: smooth;
 
 }
 
-p.nomessages{
-    color: #fff; 
+p.nomessages {
+    color: #fff;
     background-color: #33333390;
     padding: 10px;
     margin: 10px auto;
@@ -117,28 +131,28 @@ p.nomessages{
 
 }
 
-@media(min-width: 768px){
+@media(min-width: 768px) {
     .convo-box {
         max-height: calc(100vh - 180px);
     }
 
-    .message{
+    .message {
         font-size: 25px;
     }
 
-    .left .message{
+    .left .message {
         margin-left: 60px;
     }
 
-    .right .message{
+    .right .message {
         margin-right: 60px;
     }
 
-    .left .name{
+    .left .name {
         margin-left: 20px;
     }
 
-    .right .name{
+    .right .name {
         margin-right: 20px;
     }
 }

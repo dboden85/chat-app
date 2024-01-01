@@ -47,15 +47,15 @@ function App() {
         :
         <div className='app-container'>
           <Header openFriends={openFriendsHandler} openConvos={openConversationsHandler}/>
-          
+          <ConversationProvider>
             <div className='fc-container'>
               {isFriendListOpen && <FriendsList closeMenu={closeFriendsHandler}/>}
               {isConversationsOpen && <ConversationList closeConvos={closeConversationsHandler}/>}
-              <ConversationProvider>
-                <Conversation url={url} />
-              </ConversationProvider>
+              
+              <Conversation url={url} />
+              
             </div>
-          
+          </ConversationProvider>
         </div>
       }
 

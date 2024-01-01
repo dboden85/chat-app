@@ -2,8 +2,10 @@ import React from 'react';
 
 const ConvoContext = React.createContext({
     convos: [],
-    setNewMess: ()=>{},
-    getChat: ()=>{}
+    roomName: '',
+    setNewMess: () => { },
+    getChat: () => { },
+    switchToConvo: () => { }
 });
 
 export default ConvoContext;

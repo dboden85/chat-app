@@ -1,26 +1,41 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ConvoContext from './convo-context';
 import io from 'socket.io-client';
 import LoginContext from '../login/login-context';
 
-const ConversationProvider = (props)=>{
-    const [convo, setConvo] = useState([]);
-    const [room, setRoom] = useState(0);
-    const [newMessage, setNewMessage] = useState([]);
-    const loginCtx = useContext(LoginContext);
+const socket = io.connect('http://chat.david-boden.com:5000');
 
-    const socket = io.connect('http://chat.david-boden.com:5000');
+const ConversationProvider = (props) => {
+  const [convo, setConvo] = useState([]);
+  const [room, setRoom] = useState(1);
+  const [roomName, setRoomName] = useState('Lobby');
+  const [newMessage, setNewMessage] = useState({});
+  const loginCtx = useContext(LoginContext);
 
-    //use socket.io to send messages out.
+  const joinRoom = () => {
+    socket.emit("join_room", { room });
+  }
+
+  useEffect(() => {
+    joinRoom();
+  }, [room])
+
+  const switchToConvo = (rnum, rname) => {
+    setRoom(rnum);
+    setRoomName(rname);
+  }
+
+  //use socket.io to send messages out.
   useEffect(() => {
     const sendMessageAndFetchChat = () => {
+      joinRoom();
       if (newMessage.message && loginCtx.currentUser) {
         // Emit the message to the server
-        socket.emit('send_message', newMessage);
+        socket.emit('send_message', { newMessage, room });
         setConvo(prev => [...prev, newMessage]);
       }
     };
-  
+
     sendMessageAndFetchChat();
 
   }, [newMessage]);
@@ -28,14 +43,15 @@ const ConversationProvider = (props)=>{
   //use socket.io to recieve messages.
   useEffect(() => {
     const handleReceivedMessage = (data) => {
+      console.log(data);
       if (data.message && loginCtx.currentUser && data.userid !== loginCtx.currentUser.id) {
         data.isUser = data.userid === loginCtx.currentUser.id;
         setConvo((prev) => [...prev, data]);
       }
     };
-  
+
     socket.on('receive_message', handleReceivedMessage);
-  
+
     return () => {
       socket.off('receive_message', handleReceivedMessage);
     };
@@ -43,27 +59,35 @@ const ConversationProvider = (props)=>{
 
   const getChat = async () => {
     try {
-      const response = await fetch(`http://chat.david-boden.com:5000/api/chats`);
+      const response = await fetch(`http://chat.david-boden.com:5000/api/chats`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ room: room }),
+      });
       const data = await response.json();
       if (loginCtx.currentUser) {
         data.forEach(chat => {
-        chat.isUser = chat.userid === loginCtx.currentUser.id;
-      });
-      setConvo(data);
-    }
+          chat.isUser = chat.userid === loginCtx.currentUser.id;
+        });
+        setConvo(data);
+      }
     } catch (err) {
       console.log(`${err}\nLet Dave or Mark know`);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getChat();
-  }, [])
+  }, [room])
 
   const convoContext = {
     convos: convo,
+    roomName: roomName,
     getChat: getChat,
-    setNewMess: setNewMessage
+    setNewMess: setNewMessage,
+    switchToConvo: switchToConvo
   };
 
   return (

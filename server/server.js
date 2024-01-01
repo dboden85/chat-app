@@ -45,17 +45,28 @@ db.connect((err) => {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
+  socket.on("join_room", (data) => {
+    console.log(data.room)
+    socket.join(data.room);
+  });
+
   socket.on("send_message", (data) => {
-    console.log(data);
 
-    socket.broadcast.emit('receive_message', data);
+    // io.to(data.room).emit("receive_message", data.newMessage);
 
-    const { message, userid, name } = data;
-    const query = 'INSERT INTO chats (name, userid, message) VALUES(?, ?, ?);';
+    socket.broadcast.to(data.room).emit('receive_message', data.newMessage);
 
-    db.query(query, [name, userid, message], (error) => {
+    // const { message, userid, name } = data;
+    const name = data.newMessage.name;
+    const userid = data.newMessage.userid;
+    const message = data.newMessage.message;
+    const room = data.room;
+
+    const query = 'INSERT INTO chats (name, userid, message, roomid) VALUES(?, ?, ?, ?);';
+
+    db.query(query, [name, userid, message, room], (error) => {
       if (error) {
-        console.log("Error adding a new message to the chats database");
+        console.log("Error adding a new message to the chats database:", error);
       }
     });
   });
@@ -66,8 +77,11 @@ app.get('/api/users', getAllUsers);
 app.post('/api/login', loginUser);
 app.post('/api/signup', signUpUser);
 app.post('/api/signout', signOutUser);
-app.get('/api/chats', getAllChats);
+app.post('/api/chats', getAllChats);
 app.post('/api/convo-list', getConversationList);
+app.post('/api/friendslist', getFriendsList);
+app.post('/api/startconvo', startConvo);
+
 // Helper functions
 function handleDatabaseError(error, res) {
   console.error('Error executing query: ' + error);
@@ -164,24 +178,50 @@ function signOutUser(req, res) {
   });
 }
 
-function getConversationList(req, res){
+function getFriendsList(req, res) {
+  const { userid } = req.body;
+  const query = 'SELECT id, firstname, lastname FROM users where id != ?;';
+
+  db.query(query, [userid], (error, results) => {
+    if (error) {
+      return handleDatabaseError(error, res);
+    }
+
+    res.status(200).json({ message: 'Friendlist retrieved successfully', friends: results });
+
+  })
+}
+
+function startConvo(req, res) {
+  const { userid, friendid } = req.body;
+  const query = 'INSERT INTO rooms(person_one, person_two) VALUES(?, ?);';
+
+  db.query(query, [userid, friendid], (error, results) => {
+    if (error) {
+      return handleDatabaseError(error, res);
+    }
+    res.status(200).json({ message: 'Conversation started successfully', status: 1 });
+  })
+
+}
+
+function getConversationList(req, res) {
   const { uid } = req.body;
   const query = `SELECT rooms.id, users.firstname, users.lastname FROM rooms INNER JOIN users ON rooms.person_one = users.id OR rooms.person_two = users.id WHERE (rooms.person_one = ${uid} OR rooms.person_two = ${uid}) AND users.id != ${uid};`;
   db.query(query, (error, results) => {
-    if(error){
+    if (error) {
       return handleDatabaseError(error, res);
     }
     // handleDatabaseResponse(error, results, res);
-    res.status(200).json({ message: 'Conversation List Received', results: results,  status: 1 });
-    console.log(results[0]);
-    console.log(results[0].firstname);
+    res.status(200).json({ message: 'Conversation List Received', results: results, status: 1 });
   })
 }
 
 
 function getAllChats(req, res) {
-  const query = 'SELECT * FROM chats';
-  db.query(query, (error, results) => {
+  const { room } = req.body;
+  const query = 'SELECT * FROM chats WHERE roomid = ?;';
+  db.query(query, [room], (error, results) => {
     handleDatabaseResponse(error, results, res);
   });
 }

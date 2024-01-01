@@ -9,6 +9,8 @@ const Conversation = (props) => {
   const convoRef = useRef(null);
   const convoCtx = useContext(ConvoContext);
 
+  console.log(convoCtx.roomName);
+
   useEffect(() => {
     if (convoRef.current) {
       convoRef.current.scrollTop = convoRef.current.scrollHeight;
@@ -17,6 +19,9 @@ const Conversation = (props) => {
 
   return (
     <div className={classes.convocontainer}>
+      <div className={classes.roomName}>
+        <p>{convoCtx.roomName}</p>
+      </div>
       <div className={classes['convo-box']}>
         <div className={classes.convos} ref={convoRef}>
           {convoCtx.convos.length > 0 ? (
