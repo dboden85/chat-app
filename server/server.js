@@ -165,7 +165,6 @@ function signUpUser(req, res) {
 }
 
 function signOutUser(req, res) {
-  console.log('Signout ran');
   const { id } = req.body;
   const query = 'UPDATE users SET isonline = 0 WHERE id = ?;';
 

@@ -5,10 +5,20 @@ import LoginContext from '../login/login-context';
 
 const socket = io.connect('http://chat.david-boden.com:5000');
 
+const sRoomNum = sessionStorage.getItem('roomNumber');
+
+const sRoomName = sessionStorage.getItem('roomName');
+
+console.log('rnum: ' + sRoomNum + '\n rname: ' + sRoomName)
+
+const defaultRoom = sRoomNum ? sRoomNum : 1;
+const defaultRoomName = sRoomName ? sRoomName : 'Lobby';
+
+
 const ConversationProvider = (props) => {
   const [convo, setConvo] = useState([]);
-  const [room, setRoom] = useState(1);
-  const [roomName, setRoomName] = useState('Lobby');
+  const [room, setRoom] = useState(defaultRoom);
+  const [roomName, setRoomName] = useState(defaultRoomName);
   const [newMessage, setNewMessage] = useState({});
   const loginCtx = useContext(LoginContext);
 
@@ -23,6 +33,10 @@ const ConversationProvider = (props) => {
   const switchToConvo = (rnum, rname) => {
     setRoom(rnum);
     setRoomName(rname);
+
+    sessionStorage.setItem('roomNumber', rnum);
+    
+    sessionStorage.setItem('roomName', rname);
   }
 
   //use socket.io to send messages out.
@@ -43,11 +57,12 @@ const ConversationProvider = (props) => {
   //use socket.io to recieve messages.
   useEffect(() => {
     const handleReceivedMessage = (data) => {
-      console.log(data);
+
       if (data.message && loginCtx.currentUser && data.userid !== loginCtx.currentUser.id) {
         data.isUser = data.userid === loginCtx.currentUser.id;
         setConvo((prev) => [...prev, data]);
       }
+      
     };
 
     socket.on('receive_message', handleReceivedMessage);

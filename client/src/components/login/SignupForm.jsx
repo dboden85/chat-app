@@ -30,7 +30,6 @@ const SignupForm = (props) => {
       const data = await response.json();
 
       if (data.status) {
-        console.log(data.message);
         loginCtx.login(data);
       } else {
         alert(data.message);
@@ -71,7 +70,6 @@ const SignupForm = (props) => {
       const data = await response.json();
 
       if (data.status) {
-        console.log(data.message);
         onLoginHandler();
       } else {
         alert(data.message);

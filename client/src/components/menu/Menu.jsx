@@ -26,7 +26,6 @@ const Menu = (props) => {
             .then(response => response.json())
             .then(data => {
                 if (data.status) {
-                    console.log(data.message);
                     loginCtx.logout();
                 } else {
                     console.log(data);

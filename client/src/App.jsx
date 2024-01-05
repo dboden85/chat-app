@@ -14,8 +14,9 @@ function App() {
   const [isFriendListOpen, setIsFriendListOpen] = useState(false);
   const [isConversationsOpen, setIsConversationsOpen] = useState(false);
 
-  const openFriendsHandler = () => {
+  const openFriendsHandler = ()=>{
     setIsFriendListOpen(true);
+    setIsConversationsOpen(false);
   }
 
   const closeFriendsHandler = () => {
@@ -24,6 +25,7 @@ function App() {
 
   const openConversationsHandler = () => {
     setIsConversationsOpen(true);
+    setIsFriendsListOpen(false);
   }
 
   const closeConversationsHandler = () => {

@@ -45,10 +45,7 @@ const FriendsList = (props) => {
             .then(response => response.json())
             .then(
                 data => {
-                    console.log(data)
                     if (data.status) {
-                        console.log('Message: ' + data.message + '\nConvo ID: ' + data.convoid);
-
                         convoCtx.switchToConvo(data.convoid, e.target.dataset.rname);
                         props.closeMenu();
                     }

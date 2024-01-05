@@ -9,8 +9,6 @@ const Conversation = (props) => {
   const convoRef = useRef(null);
   const convoCtx = useContext(ConvoContext);
 
-  console.log(convoCtx.roomName);
-
   useEffect(() => {
     if (convoRef.current) {
       convoRef.current.scrollTop = convoRef.current.scrollHeight;
