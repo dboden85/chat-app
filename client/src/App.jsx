@@ -18,7 +18,7 @@ function App() {
     setIsFriendListOpen(true);
   }
 
-  const closeFriendsHandler = ()=>{
+  const closeFriendsHandler = () => {
     setIsFriendListOpen(false);
   }
 
@@ -46,14 +46,14 @@ function App() {
         </>
         :
         <div className='app-container'>
-          <Header openFriends={openFriendsHandler} openConvos={openConversationsHandler}/>
+          <Header openFriends={openFriendsHandler} openConvos={openConversationsHandler} />
           <ConversationProvider>
             <div className='fc-container'>
-              {isFriendListOpen && <FriendsList closeMenu={closeFriendsHandler}/>}
-              {isConversationsOpen && <ConversationList closeConvos={closeConversationsHandler}/>}
-              
+              {isFriendListOpen && <FriendsList closeMenu={closeFriendsHandler} />}
+              {isConversationsOpen && <ConversationList closeConvos={closeConversationsHandler} />}
+
               <Conversation url={url} />
-              
+
             </div>
           </ConversationProvider>
         </div>

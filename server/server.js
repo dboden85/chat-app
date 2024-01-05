@@ -46,7 +46,6 @@ io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("join_room", (data) => {
-    console.log(data.room)
     socket.join(data.room);
   });
 
@@ -194,13 +193,44 @@ function getFriendsList(req, res) {
 
 function startConvo(req, res) {
   const { userid, friendid } = req.body;
+  const qCheck = 'SELECT * FROM rooms WHERE (person_one = ? AND person_two = ?) OR (person_one = ? AND person_two = ?);';
   const query = 'INSERT INTO rooms(person_one, person_two) VALUES(?, ?);';
+  const getPrimaryID = 'SELECT id FROM rooms WHERE id = LAST_INSERT_ID();';
 
-  db.query(query, [userid, friendid], (error, results) => {
+  db.query(qCheck, [userid, friendid, friendid, userid], (error, results) => {
     if (error) {
       return handleDatabaseError(error, res);
     }
-    res.status(200).json({ message: 'Conversation started successfully', status: 1 });
+
+    if (results.length > 0) {
+
+      res.status(200).json({ message: 'Conversation Exists', convoid: results[0].id, status: 2 });
+
+    } else {
+
+      db.query(query, [userid, friendid], (aerror, aresults) => {
+
+        if (aerror) {
+
+          return handleDatabaseError(aerror, res);
+
+        }
+
+        db.query(getPrimaryID, (berror, bResults) => {
+          if (berror) {
+
+            return handleDatabaseError(berror, res);
+
+          }
+
+          res.status(200).json({ message: 'Conversation started successfully', convoid: bResults[0].id, status: 1 });
+
+        })
+
+      })
+
+    }
+
   })
 
 }

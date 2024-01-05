@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import classes from './FriendsList.module.css';
 import LoginContext from "../login/login-context";
+import ConvoContext from "../conversation/convo-context";
 
 const FriendsList = (props) => {
     const [friends, setFriends] = useState([]);
 
     const loginCtx = useContext(LoginContext);
+    const convoCtx = useContext(ConvoContext);
 
     const Close = () => {
         return (
@@ -32,7 +34,6 @@ const FriendsList = (props) => {
     }, []);
 
     const onFriendClick = (e) => {
-        console.log('Clicked Friend\'s user id: ' + e.target.dataset.userid);
 
         fetch('http://chat.david-boden.com:5000/api/startconvo', {
             method: 'POST',
@@ -44,8 +45,11 @@ const FriendsList = (props) => {
             .then(response => response.json())
             .then(
                 data => {
-                    console.log(data.message);
+                    console.log(data)
                     if (data.status) {
+                        console.log('Message: ' + data.message + '\nConvo ID: ' + data.convoid);
+
+                        convoCtx.switchToConvo(data.convoid, e.target.dataset.rname);
                         props.closeMenu();
                     }
                 }
@@ -64,7 +68,7 @@ const FriendsList = (props) => {
                 <ul>
                     {
                         friends.map(friend => (
-                            <li onClick={onFriendClick} data-userid={friend.id} key={friend.id} className={classes.friend}>{friend.firstname + ' ' + friend.lastname}</li>
+                            <li onClick={onFriendClick} data-rname={friend.firstname + ' ' + friend.lastname} data-userid={friend.id} key={friend.id} className={classes.friend}>{friend.firstname + ' ' + friend.lastname}</li>
                         ))
                     }
                 </ul>
