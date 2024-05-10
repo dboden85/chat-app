@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://chat.david-boden.com",
+    origin: "https://chat.david-boden.com",
     methods: ["GET", "POST"],
   },
 });
