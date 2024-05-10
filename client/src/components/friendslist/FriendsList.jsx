@@ -17,7 +17,7 @@ const FriendsList = (props) => {
 
 
     useEffect(() => {
-        fetch('http://chat.david-boden.com:5000/api/friendslist', {
+        fetch('https://api.david-boden.com/api/friendslist', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const FriendsList = (props) => {
 
     const onFriendClick = (e) => {
 
-        fetch('http://chat.david-boden.com:5000/api/startconvo', {
+        fetch('https://api.david-boden.com/api/startconvo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

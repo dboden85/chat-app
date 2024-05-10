@@ -19,7 +19,7 @@ const SignupForm = (props) => {
     }
 
     try {
-      const response = await fetch(`http://${props.url}:5000/api/login`, {
+      const response = await fetch(`https://${props.url}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const SignupForm = (props) => {
     }
 
     try {
-      const response = await fetch(`http://${props.url}:5000/api/signup`, {
+      const response = await fetch(`https://${props.url}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

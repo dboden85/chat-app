@@ -15,7 +15,7 @@ const ConversationList = (props) => {
     };
 
     useEffect(() => {
-        fetch('http://chat.david-boden.com:5000/api/convo-list', {
+        fetch('https://api.david-boden.com/api/convo-list', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

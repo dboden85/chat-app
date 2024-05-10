@@ -106,7 +106,6 @@ function getAllUsers(req, res) {
 function loginUser(req, res) {
   const { username, pass } = req.body;
   const query = 'SELECT * FROM users WHERE username = ?;';
-  const setStatus = 'UPDATE users SET isonline = 1 WHERE id = ?;';
 
   db.query(query, [username], (error, results) => {
     if (error) {
@@ -119,12 +118,9 @@ function loginUser(req, res) {
           return handleDatabaseError(compareErr, res);
         }
         if (isMatch) {
-          db.query(setStatus, results[0].id, (aError) => {
-            if (aError) {
-              return handleDatabaseError(aError, res);
-            }
-            res.status(200).json({ message: 'Login successful', name: results[0].firstname, id: results[0].id, status: 1 });
-          });
+
+          res.status(200).json({ message: 'Login successful', name: results[0].firstname, id: results[0].id, status: 1 });
+
         } else {
           res.status(401).json({ message: 'Login failed', status: 0 });
         }

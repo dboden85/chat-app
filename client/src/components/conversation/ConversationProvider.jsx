@@ -3,7 +3,7 @@ import ConvoContext from './convo-context';
 import io from 'socket.io-client';
 import LoginContext from '../login/login-context';
 
-const socket = io.connect('http://chat.david-boden.com:5000');
+const socket = io.connect('https://api.david-boden.com');
 
 const sRoomNum = sessionStorage.getItem('roomNumber');
 
@@ -35,7 +35,7 @@ const ConversationProvider = (props) => {
     setRoomName(rname);
 
     sessionStorage.setItem('roomNumber', rnum);
-    
+
     sessionStorage.setItem('roomName', rname);
   }
 
@@ -62,7 +62,7 @@ const ConversationProvider = (props) => {
         data.isUser = data.userid === loginCtx.currentUser.id;
         setConvo((prev) => [...prev, data]);
       }
-      
+
     };
 
     socket.on('receive_message', handleReceivedMessage);
@@ -74,7 +74,7 @@ const ConversationProvider = (props) => {
 
   const getChat = async () => {
     try {
-      const response = await fetch(`http://chat.david-boden.com:5000/api/chats`, {
+      const response = await fetch(`https://api.david-boden.com/api/chats`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

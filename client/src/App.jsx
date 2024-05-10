@@ -8,13 +8,13 @@ import Login from './components/login/Login'
 import LoginContext from './components/login/login-context'
 import ConversationProvider from './components/conversation/ConversationProvider';
 
-const url = 'chat.david-boden.com';
+const url = 'api.david-boden.com';
 function App() {
   const loginCtx = useContext(LoginContext);
   const [isFriendListOpen, setIsFriendListOpen] = useState(false);
   const [isConversationsOpen, setIsConversationsOpen] = useState(false);
 
-  const openFriendsHandler = ()=>{
+  const openFriendsHandler = () => {
     setIsFriendListOpen(true);
     setIsConversationsOpen(false);
   }
@@ -43,7 +43,6 @@ function App() {
 
       {!loginCtx.isLoggedIn ?
         <>
-          <Logo />
           <Login url={url} />
         </>
         :

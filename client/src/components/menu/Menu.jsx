@@ -16,7 +16,7 @@ const Menu = (props) => {
     }
 
     const onSignoutHandler = (props) => {
-        fetch('http://chat.david-boden.com:5000/api/signout', {
+        fetch('https://api.david-boden.com/api/signout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
