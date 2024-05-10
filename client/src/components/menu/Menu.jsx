@@ -16,24 +16,25 @@ const Menu = (props) => {
     }
 
     const onSignoutHandler = (props) => {
-        fetch('https://api.david-boden.com/api/signout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: loginCtx.currentUser.id }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status) {
-                    loginCtx.logout();
-                } else {
-                    console.log(data);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        //fetch('https://api.david-boden.com/api/signout', {
+          //  method: 'POST',
+            //headers: {
+              //  'Content-Type': 'application/json',
+            //},
+            //body: JSON.stringify({ id: loginCtx.currentUser.id }),
+        //})
+          //  .then(response => response.json())
+          //  .then(data => {
+            //    if (data.status) {
+              //      loginCtx.logout();
+                //} else {
+                  //  console.log(data);
+                //}
+            //})
+            //.catch(err => {
+              //  console.log(err);
+            //})
+        loginCtx.logout();
     }
 
     return (
