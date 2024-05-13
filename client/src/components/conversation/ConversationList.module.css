@@ -50,6 +50,7 @@
     .conversationlist{
         position: relative;
         height: 100%;
+        max-height: calc(50% - 50px);
     }
 
     .conversationlist .conversationhead{
@@ -65,5 +66,11 @@
 
     .conversationlist .conversationhead svg{
         display: none;
+    }
+
+    .conversationlist .conversations{
+        height: calc(100% - 36.8px);
+        margin-top: 0;
+        overflow: hidden;
     }
 }

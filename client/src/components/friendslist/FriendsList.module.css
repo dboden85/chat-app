@@ -50,6 +50,7 @@
     .friendslist{
         position: unset;
         height: 100%;
+        max-height: calc(50% - 50px);
     }
 
     .friendslist .friendshead{
@@ -64,5 +65,11 @@
 
     .friendslist .friendshead svg{
         display: none;
+    }
+
+    .friendslist .friends{
+        height: calc(100% - 36.8px);
+        margin-top: 0;
+        overflow: hidden;
     }
 }
