@@ -15,28 +15,6 @@ const Menu = (props) => {
         props.openConvos();
     }
 
-    const onSignoutHandler = (props) => {
-        //fetch('https://api.david-boden.com/api/signout', {
-          //  method: 'POST',
-            //headers: {
-              //  'Content-Type': 'application/json',
-            //},
-            //body: JSON.stringify({ id: loginCtx.currentUser.id }),
-        //})
-          //  .then(response => response.json())
-          //  .then(data => {
-            //    if (data.status) {
-              //      loginCtx.logout();
-                //} else {
-                  //  console.log(data);
-                //}
-            //})
-            //.catch(err => {
-              //  console.log(err);
-            //})
-        loginCtx.logout();
-    }
-
     return (
         <div className={classes.menuContainer}>
             <ul>
@@ -46,7 +24,7 @@ const Menu = (props) => {
 
             <div className={classes['signout-container']}>
                 <button onClick={props.closeMenu} className={classes.btn}>Close Menu</button>
-                <button onClick={onSignoutHandler} className={classes.btn}>
+                <button onClick={loginCtx.logout} className={classes.btn}>
                     Sign Out
                 </button>
             </div>

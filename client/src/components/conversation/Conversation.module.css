@@ -6,7 +6,7 @@
 .roomName {
     margin: 0;
     padding: 5px;
-    background-color: black;
+    background-color: #000;
 }
 
 .roomName p {
@@ -27,7 +27,7 @@
     width: 100%;
     height: 100%;
     background-color: #fff;
-    background-image: url('../../assets/images/fire.svg');
+    /* background-image: url('../../assets/images/fire.svg'); */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -154,5 +154,11 @@ p.nomessages {
 
     .right .name {
         margin-right: 20px;
+    }
+}
+
+@media(min-width: 1024px){
+    .convocontainer{
+        max-width: calc(100% - 500px);
     }
 }

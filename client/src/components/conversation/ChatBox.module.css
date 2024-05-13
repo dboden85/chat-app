@@ -52,3 +52,9 @@
     background-color: #800000;
     color: #fff;
 }
+
+@media(min-width: 1024px){
+    .chat-box{
+        max-width: calc(100% - 500px);
+    }
+}

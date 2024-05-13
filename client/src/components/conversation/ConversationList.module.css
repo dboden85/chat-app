@@ -45,3 +45,25 @@
     margin-left: 5px;
     transition: margin .25s ease-in-out;
 }
+
+@media(min-width: 1024px){
+    .conversationlist{
+        position: relative;
+        height: 100%;
+    }
+
+    .conversationlist .conversationhead{
+        display: block;
+        padding: 0;
+        background-color: #cc5500;
+    }
+
+        .conversationlist .conversationhead h2{
+            text-align: center;
+            padding: 4px 0;
+        }
+
+    .conversationlist .conversationhead svg{
+        display: none;
+    }
+}

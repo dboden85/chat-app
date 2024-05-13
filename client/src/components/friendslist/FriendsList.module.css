@@ -45,3 +45,24 @@
     margin-left: 5px;
     transition: margin .25s ease-in-out;
 }
+
+@media(min-width: 1024px){
+    .friendslist{
+        position: unset;
+        height: 100%;
+    }
+
+    .friendslist .friendshead{
+        display: block;
+        padding: 0;
+        background-color: #cc5500;
+    }
+
+    .friendshead h2{
+        padding: 4px 0;
+    }
+
+    .friendslist .friendshead svg{
+        display: none;
+    }
+}
