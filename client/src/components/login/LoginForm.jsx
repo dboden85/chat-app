@@ -33,6 +33,7 @@ const LoginForm = (props) => {
 
       if (data.status) {
         setIsLoading(false);
+        console.log(data)
         loginCtx.login(data);
       } else {
         alert(data.message);

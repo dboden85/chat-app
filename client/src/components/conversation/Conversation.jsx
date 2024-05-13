@@ -27,7 +27,7 @@ const Conversation = (props) => {
               {convoCtx.convos.map(chat => (
                 <li key={chat.id} className={chat.isUser ? classes.right : classes.left}>
                   <p className={classes.message}>{chat.message}</p>
-                  <p className={classes.name}>{chat.name}</p>
+                  <p className={classes.name}>{chat.name} </p>
                 </li>
               ))}
             </ul>

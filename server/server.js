@@ -119,7 +119,7 @@ function loginUser(req, res) {
         }
         if (isMatch) {
 
-          res.status(200).json({ message: 'Login successful', name: results[0].firstname, id: results[0].id, status: 1 });
+          res.status(200).json({ message: 'Login successful', name: results[0].firstname + ' ' + results[0].lastname, id: results[0].id, status: 1 });
 
         } else {
           res.status(401).json({ message: 'Login failed', status: 0 });
