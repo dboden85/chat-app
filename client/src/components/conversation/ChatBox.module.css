@@ -55,6 +55,6 @@
 
 @media(min-width: 1024px){
     .chat-box{
-        max-width: calc(100% - 500px);
+        max-width: calc(100% - 350px);
     }
 }
