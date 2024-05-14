@@ -2,8 +2,9 @@
     display: none;
     flex-direction: column;
     width: 350px;
-    height: 100%;
+    height: calc(100vh - 72px);
     background-color: #000;
+    overflow: hidden;
 }
 
 .sidebar .signoutContainer{
