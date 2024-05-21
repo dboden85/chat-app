@@ -16,11 +16,11 @@
 }
 
 .convo-box {
-    width: 100%;
+    width: calc(100% + 5px);
     height: 100%;
     background-color: gray;
     /* Updated solid background color */
-    max-height: calc(100vh - 217px);
+    max-height: calc(100vh - 200px);
 }
 
 .convo-box .convos {
@@ -74,7 +74,7 @@
     width: max-content;
     min-width: 200px;
     max-width: 90%;
-    padding: 20px;
+    padding: 13px;
     color: #fff;
     text-align: center;
     font-size: 18px;
@@ -133,11 +133,11 @@ p.nomessages {
 
 @media(min-width: 768px) {
     .convo-box {
-        max-height: calc(100vh - 202px);
+        max-height: calc(100vh - 192px);
     }
 
     .message {
-        font-size: 25px;
+        font-size: 18px;
     }
 
     .left .message {
