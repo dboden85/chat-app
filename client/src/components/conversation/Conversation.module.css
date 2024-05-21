@@ -31,7 +31,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
-    overflow: scroll;
+    overflow: auto;
     overflow-anchor: auto;
     scroll-behavior: smooth;
 }
@@ -55,7 +55,7 @@
 .right .name {
     width: max-content;
     text-align: right;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     margin-top: 0;
     color: #000;
@@ -64,7 +64,7 @@
 .left .name {
     width: max-content;
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     margin-top: 0;
     color: #000;
@@ -133,11 +133,11 @@ p.nomessages {
 
 @media(min-width: 768px) {
     .convo-box {
-        max-height: calc(100vh - 192px);
+        max-height: calc(100vh - 202px);
     }
 
     .message {
-        font-size: 18px;
+        font-size: 25px;
     }
 
     .left .message {
@@ -149,11 +149,11 @@ p.nomessages {
     }
 
     .left .name {
-        margin-left: 20px;
+        margin-left: 16px;
     }
 
     .right .name {
-        margin-right: 20px;
+        margin-right: 16px;
     }
 }
 
