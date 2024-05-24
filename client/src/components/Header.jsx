@@ -27,6 +27,11 @@ const Header = (props) => {
         <div className={classes.usergreet}>
           <p>Hello {loginCtx.currentUser.name}!</p>
         </div>
+        <div className={classes['header-signout-container']}>
+            <button onClick={loginCtx.logout} className={classes.btn}>
+                Sign Out
+            </button>
+        </div>
         <div className={classes.menuIconContainer}>
           <MenuIcon className={classes.menuIcon} />
         </div>

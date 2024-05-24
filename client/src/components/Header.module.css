@@ -5,7 +5,7 @@
   align-items: center;
   height: auto;
   padding: 20px 0;
-  background-color: #cc5500;
+  background-color: #333;
   position: relative;
 }
 
@@ -13,6 +13,20 @@
   margin: 0 20px;
   font-size: 28px;
 
+}
+
+.header .header-signout-container{
+  margin-right: 25px;  
+}
+
+.header .header-signout-container .btn{
+  width: 100px;
+  padding: 10px;
+  background-color: #000;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 10px;
 }
 
 .header .menuIconContainer{
