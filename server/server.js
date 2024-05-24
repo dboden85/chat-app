@@ -109,19 +109,25 @@ function loginUser(req, res) {
 
   db.query(query, [username], (error, results) => {
     if (error) {
+      console.log('error 1')
       return handleDatabaseError(error, res);
     }
 
     if (results.length === 1) {
       bcrypt.compare(pass, results[0].password, (compareErr, isMatch) => {
         if (compareErr) {
+          console.log('error 2');
           return handleDatabaseError(compareErr, res);
+          
         }
         if (isMatch) {
 
           res.status(200).json({ message: 'Login successful', name: results[0].firstname + ' ' + results[0].lastname, id: results[0].id, status: 1 });
 
+          console.log(results[0]);
+
         } else {
+          console.log(isMatch)
           res.status(401).json({ message: 'Login failed', status: 0 });
         }
       });
