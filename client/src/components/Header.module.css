@@ -17,6 +17,7 @@
 
 .header .header-signout-container{
   margin-right: 25px;  
+  display: none;
 }
 
 .header .header-signout-container .btn{
@@ -61,5 +62,9 @@
 @media(min-width: 1024px){
   .header .menuIconContainer{
     display: none;
+  }
+
+  .header .header-signout-container{
+    display: block;
   }
 }

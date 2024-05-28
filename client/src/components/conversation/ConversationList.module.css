@@ -24,24 +24,20 @@
 
 .conversationlist .conversations {
     width: 100%;
-    margin-top: 30px;
-    padding: 20px;
 }
 
 .conversations .conversation {
-    width: 90%;
+    width: 100%;
     height: auto;
-    margin: 10px auto;
-    padding: 7px;
+    padding: 10px 30px;
     background-color: #000;
     list-style-type: none;
     color: #fff;
     font-size: 20px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px #000;
+    
 }
 
-.conversation:hover {
+.conversations .conversation:hover {
     background-color: #cc5500;
     cursor: pointer;
     /* margin-left: 5px;
@@ -82,7 +78,11 @@
     .conversationlist .conversations ul{
         /* width: calc(100% + 17px); */
         height: 100%;
-        padding: 9px;
         overflow-y: auto;
+        margin-top: 30px;
     }
+
+    .conversations .conversation {
+    background-color: inherit;
+}
 }
