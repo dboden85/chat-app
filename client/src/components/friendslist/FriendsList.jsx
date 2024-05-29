@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import classes from './FriendsList.module.css';
 import LoginContext from "../login/login-context";
 import ConvoContext from "../conversation/convo-context";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const FriendsList = (props) => {
     const [friends, setFriends] = useState([]);
@@ -65,7 +66,7 @@ const FriendsList = (props) => {
                 <ul>
                     {
                         friends.map(friend => (
-                            <li onClick={onFriendClick} data-rname={friend.firstname + ' ' + friend.lastname} data-userid={friend.id} key={friend.id} className={classes.friend}>{friend.firstname + ' ' + friend.lastname}</li>
+                            <li onClick={onFriendClick} data-rname={friend.firstname + ' ' + friend.lastname} data-userid={friend.id} key={friend.id} className={classes.friend}><FontAwesomeIcon icon="fa-solid fa-user" /> {friend.firstname + ' ' + friend.lastname}</li>
                         ))
                     }
                 </ul>
