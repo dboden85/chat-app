@@ -4,7 +4,7 @@ import LoginContext from '../login/login-context';
 import ConvoContext from './convo-context';
 import plane from '../../assets/images/paper-plane.svg';
 
-const ChatBox = (props) => {
+const ChatBox = () => {
   const messRef = useRef();
   const loginCtx = useContext(LoginContext);
   const convoCtx = useContext(ConvoContext);

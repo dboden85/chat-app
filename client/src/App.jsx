@@ -26,7 +26,7 @@ function App() {
 
   const openConversationsHandler = () => {
     setIsConversationsOpen(true);
-    setIsFriendsListOpen(false);
+    setIsFriendListOpen(false);
   }
 
   const closeConversationsHandler = () => {

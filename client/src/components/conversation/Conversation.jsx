@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import classes from './Conversation.module.css';
 import ChatBox from './ChatBox';
 import ConvoContext from './convo-context';
