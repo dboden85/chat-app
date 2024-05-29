@@ -44,6 +44,14 @@
     transition: margin .25s ease-in-out; */
 }
 
+.friends .friend .userIcon{
+    fill: #cc5500;
+}
+
+.friends .friend:hover .userIcon{
+    fill: #fff;
+}
+
 @media(min-width: 1024px){
     .friendslist{
         position: unset;

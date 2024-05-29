@@ -44,6 +44,14 @@
     transition: margin .25s ease-in-out; */
 }
 
+.conversations .conversation .userIcon{
+    fill: #cc5500;
+}
+
+.conversations .conversation:hover .userIcon{
+    fill: #fff;
+}
+
 @media(min-width: 1024px){
     .conversationlist{
         position: relative;
